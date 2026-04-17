@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0E0E12;
+  color: #F7F5F0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #F3F31A;
+  color: #0E0E12;
+}
+
+/* HERO slideshow — N slides, ~1s crossfade, subtle Ken Burns zoom.
+   Each element sets animation-duration (N × per-slide seconds) + animation-delay inline. */
+@keyframes heroSlide {
+  0%    { opacity: 0; transform: scale(1.06); }
+  2%    { opacity: 1; }
+  10.5% { opacity: 1; transform: scale(1.12); }
+  13%   { opacity: 0; }
+  100%  { opacity: 0; transform: scale(1.06); }
+}
+
+.hero-slide {
+  animation-name: heroSlide;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Soft float for the hook */
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+.soft-float { animation: softFloat 4s ease-in-out infinite; }
+
+/* Marquee for trust bar */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 40s linear infinite; }
+
+/* Hide scrollbar for swipe containers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-up { transform: translateY(40px); }
+.reveal-left { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+.reveal-scale { transform: scale(0.95); }
+.reveal.revealed {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* Logo dot pulse */
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.logo-dot {
+  color: #F3F31A;
+  animation: dotPulse 2s ease-in-out infinite;
+}

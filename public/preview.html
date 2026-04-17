@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>YUKO Photo Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0E0E12; color: #F7F5F0; font-family: -apple-system, sans-serif; padding: 40px; }
+  h1 { font-size: 32px; margin-bottom: 8px; }
+  h2 { font-size: 22px; color: #F3F31A; margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #F3F31A33; }
+  .sub { opacity: 0.6; margin-bottom: 30px; }
+  .src { font-size: 12px; opacity: 0.5; margin: -10px 0 20px; text-transform: uppercase; letter-spacing: 1px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: #1A1A22; border: 1px solid #ffffff15; border-radius: 12px; overflow: hidden; }
+  .card img { width: 100%; height: 240px; object-fit: cover; display: block; background: #111; }
+  .label { padding: 10px 12px; font-size: 12px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+  .uns { border-left: 3px solid #6b8aff; }
+  .bing { border-left: 3px solid #F3F31A; }
+</style>
+</head>
+<body>
+  <h1>YUKO Photo Preview</h1>
+  <p class="sub">Blue bar = Unsplash (license-clean) · Yellow bar = Bing/Google (check license per image)</p>
+
+  <h2>1. Seoul Night / Namsan Tower</h2>
+  <div class="grid">
+    <div class="card uns"><img src="/photos/01-seoul-night.jpg" loading="lazy"><div class="label">01-seoul-night (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/06-namsan.jpg" loading="lazy"><div class="label">06-namsan (Unsplash)</div></div>
+    <div class="card bing"><img src="/photos/g-namsan-1.jpg" loading="lazy"><div class="label">g-namsan-1 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-namsan-2.jpg" loading="lazy"><div class="label">g-namsan-2 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-namsan-3.jpg" loading="lazy"><div class="label">g-namsan-3 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-namsan-4.jpg" loading="lazy"><div class="label">g-namsan-4 (Bing)</div></div>
+  </div>
+
+  <h2>2. K-Beauty / Olive Young</h2>
+  <div class="grid">
+    <div class="card uns"><img src="/photos/13-kbeauty-a.jpg" loading="lazy"><div class="label">13-kbeauty-a (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/13-kbeauty-b.jpg" loading="lazy"><div class="label">13-kbeauty-b (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/13-kbeauty-c.jpg" loading="lazy"><div class="label">13-kbeauty-c (Unsplash)</div></div>
+    <div class="card bing"><img src="/photos/g-oliveyoung-1.jpg" loading="lazy"><div class="label">g-oliveyoung-1 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-oliveyoung-2.jpg" loading="lazy"><div class="label">g-oliveyoung-2 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-oliveyoung-3.jpg" loading="lazy"><div class="label">g-oliveyoung-3 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-oliveyoung-4.jpg" loading="lazy"><div class="label">g-oliveyoung-4 (Bing)</div></div>
+  </div>
+
+  <h2>3. K-Pop Concert</h2>
+  <div class="grid">
+    <div class="card uns"><img src="/photos/14-kpop-a.jpg" loading="lazy"><div class="label">14-kpop-a (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/14-kpop-b.jpg" loading="lazy"><div class="label">14-kpop-b (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/14-kpop-c.jpg" loading="lazy"><div class="label">14-kpop-c (Unsplash)</div></div>
+    <div class="card bing"><img src="/photos/g-kpop-1.jpg" loading="lazy"><div class="label">g-kpop-1 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-kpop-2.jpg" loading="lazy"><div class="label">g-kpop-2 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-kpop-3.jpg" loading="lazy"><div class="label">g-kpop-3 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-kpop-4.jpg" loading="lazy"><div class="label">g-kpop-4 (Bing)</div></div>
+  </div>
+
+  <h2>4. Seongsu / Pop-up Street</h2>
+  <div class="grid">
+    <div class="card uns"><img src="/photos/07-seoul-neon.jpg" loading="lazy"><div class="label">07-seoul-neon (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/08-hongdae.jpg" loading="lazy"><div class="label">08-hongdae (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/10-seoul-alley.jpg" loading="lazy"><div class="label">10-seoul-alley (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/18-popup-b.jpg" loading="lazy"><div class="label">18-popup-b (Unsplash)</div></div>
+    <div class="card bing"><img src="/photos/g-seongsu-1.jpg" loading="lazy"><div class="label">g-seongsu-1 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-seongsu-2.jpg" loading="lazy"><div class="label">g-seongsu-2 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-seongsu-3.jpg" loading="lazy"><div class="label">g-seongsu-3 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-seongsu-4.jpg" loading="lazy"><div class="label">g-seongsu-4 (Bing)</div></div>
+  </div>
+
+  <h2>5. Tteokbokki / Korean Street Food</h2>
+  <div class="grid">
+    <div class="card uns"><img src="/photos/12-myeongdong-food.jpg" loading="lazy"><div class="label">12-myeongdong-food (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/17-tteokbokki-b.jpg" loading="lazy"><div class="label">17-tteokbokki-b (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/17-tteokbokki-c.jpg" loading="lazy"><div class="label">17-tteokbokki-c (Unsplash)</div></div>
+    <div class="card bing"><img src="/photos/g-tteok-1.jpg" loading="lazy"><div class="label">g-tteok-1 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-tteok-2.jpg" loading="lazy"><div class="label">g-tteok-2 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-tteok-3.jpg" loading="lazy"><div class="label">g-tteok-3 (Bing)</div></div>
+  </div>
+
+  <h2>6. BBQ House</h2>
+  <div class="grid">
+    <div class="card uns"><img src="/photos/09-korean-bbq.jpg" loading="lazy"><div class="label">09-korean-bbq (Unsplash)</div></div>
+  </div>
+
+  <h2>7. Dessert / Bingsu / Café</h2>
+  <div class="grid">
+    <div class="card uns"><img src="/photos/03-seoul-cafe.jpg" loading="lazy"><div class="label">03-seoul-cafe (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/15-dessert-a.jpg" loading="lazy"><div class="label">15-dessert-a (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/15-dessert-b.jpg" loading="lazy"><div class="label">15-dessert-b (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/15-dessert-c.jpg" loading="lazy"><div class="label">15-dessert-c (Unsplash)</div></div>
+    <div class="card bing"><img src="/photos/g-bingsu-1.jpg" loading="lazy"><div class="label">g-bingsu-1 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-bingsu-2.jpg" loading="lazy"><div class="label">g-bingsu-2 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-bingsu-3.jpg" loading="lazy"><div class="label">g-bingsu-3 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-bingsu-4.jpg" loading="lazy"><div class="label">g-bingsu-4 (Bing)</div></div>
+  </div>
+
+  <h2>8. K-Drama Scene / Mood</h2>
+  <div class="grid">
+    <div class="card uns"><img src="/photos/16-drama-a.jpg" loading="lazy"><div class="label">16-drama-a (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/16-drama-c.jpg" loading="lazy"><div class="label">16-drama-c (Unsplash)</div></div>
+    <div class="card uns"><img src="/photos/11-friend-laugh.jpg" loading="lazy"><div class="label">11-friend-laugh (Unsplash)</div></div>
+    <div class="card bing"><img src="/photos/g-kdrama-1.jpg" loading="lazy"><div class="label">g-kdrama-1 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-kdrama-2.jpg" loading="lazy"><div class="label">g-kdrama-2 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-kdrama-3.jpg" loading="lazy"><div class="label">g-kdrama-3 (Bing)</div></div>
+    <div class="card bing"><img src="/photos/g-kdrama-4.jpg" loading="lazy"><div class="label">g-kdrama-4 (Bing)</div></div>
+  </div>
+
+</body>
+</html>
