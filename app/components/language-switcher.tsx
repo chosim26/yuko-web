@@ -21,7 +21,7 @@ export default function LanguageSwitcher({ current = "en" }: { current?: string 
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="text-xs text-white/60 hover:text-neon transition-colors flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-white/5"
+        className="text-sm text-white/80 hover:text-neon transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/20 hover:border-neon/50 bg-white/5"
       >
         <span>🌐</span>
         <span>{locales.find((l) => l.code === current)?.label}</span>
