@@ -1,6 +1,6 @@
-import ScrollReveal from "./components/scroll-reveal";
-import StickyCta from "./components/sticky-cta";
-import LanguageSwitcher from "./components/language-switcher";
+import ScrollReveal from "../components/scroll-reveal";
+import StickyCta from "../components/sticky-cta";
+import LanguageSwitcher from "../components/language-switcher";
 
 export default function Home() {
   // 9-image slideshow (hero). 4.2s × 9 = 37.8s loop with crossfade.
@@ -31,15 +31,13 @@ export default function Home() {
           <a href="#top" className="font-caveat text-3xl tracking-tight" style={{ filter: "drop-shadow(0 0 8px rgba(243,243,26,0.3))" }}>
             y<span className="text-neon">u</span>ko<span className="text-neon logo-dot">.</span>
           </a>
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher current="en" />
-            <a
-              href="/apply"
-              className="bg-neon text-obsidian px-5 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform"
-            >
-              Meet your YUKO
-            </a>
-          </div>
+          <a
+            href="/apply"
+            className="bg-neon text-obsidian px-5 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform"
+          >
+            YUKOに会う
+          </a>
+          <LanguageSwitcher current="ja" />
         </div>
       </nav>
 
@@ -78,27 +76,27 @@ export default function Home() {
             y<span className="text-neon">u</span>ko<span className="text-neon logo-dot">.</span>
           </div>
           <div className="font-caveat text-2xl md:text-5xl text-neon mt-3 md:mt-4 mb-8 md:mb-14 soft-float">
-            Your friend is here.
+            あなたの友達がここにいます。
           </div>
           <h1 className="text-xl md:text-4xl font-medium leading-tight text-off-white mb-4 md:mb-5 px-2">
-            If you had a friend in Korea,
+            もし韓国に友達がいたら、
             <br />
-            what would your trip look like?
+            どんな旅になる？
           </h1>
           <p className="text-sm md:text-lg text-white/70 max-w-xl mx-auto mb-8 md:mb-12 leading-relaxed px-4">
-            2 days before you land, a Korean peer your age
-            <br className="hidden md:inline" /> starts planning your day — with you.
+            到着の2日前から、同世代の韓国人の友達が
+            <br className="hidden md:inline" /> あなたと一緒にプランを立て始めます。
           </p>
           <div className="mb-8 md:mb-10">
             <a
               href="/apply"
               className="inline-block bg-neon text-obsidian px-8 md:px-10 py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base shadow-[0_8px_32px_rgba(243,243,26,0.35)] hover:scale-105 transition-transform"
             >
-              Meet your YUKO →
+              YUKOに会う →
             </a>
           </div>
           <div className="text-xs md:text-sm text-white/70 tracking-wide">
-            Verified peers&nbsp;&nbsp;·&nbsp;&nbsp;Pre-trip chat&nbsp;&nbsp;·&nbsp;&nbsp;Custom day
+            認証済みの仲間&nbsp;&nbsp;·&nbsp;&nbsp;出発前チャット&nbsp;&nbsp;·&nbsp;&nbsp;オーダーメイドの1日
           </div>
         </div>
 
@@ -127,7 +125,7 @@ export default function Home() {
 
         {/* Scroll indicator */}
         <div className="hidden md:block absolute bottom-10 right-8 text-neon/60 text-xs tracking-widest animate-bounce">
-          SCROLL ↓
+          スクロール ↓
         </div>
       </section>
 
@@ -135,13 +133,13 @@ export default function Home() {
       <section className="py-8 px-6 border-t border-b border-white/5 bg-obsidian-soft/40 overflow-hidden">
         <ScrollReveal direction="fade">
           <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-sm text-white/60 tracking-widest uppercase">
-            <span>No group tour</span>
+            <span>団体ツアーじゃない</span>
             <span className="text-neon/40">✦</span>
-            <span>No flag</span>
+            <span>旗もない</span>
             <span className="text-neon/40">✦</span>
-            <span>No strangers</span>
+            <span>知らない人もいない</span>
             <span className="text-neon/40">✦</span>
-            <span className="text-neon font-bold">Just a friend</span>
+            <span className="text-neon font-bold">ただの友達</span>
           </div>
         </ScrollReveal>
       </section>
@@ -150,16 +148,16 @@ export default function Home() {
       <section className="py-14 md:py-20 px-6 border-t border-white/5">
         <div className="max-w-3xl mx-auto">
           <ScrollReveal direction="up" className="text-center mb-10">
-            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1">sound familiar?</div>
+            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1">こんな経験ない？</div>
           </ScrollReveal>
           <div className="space-y-3">
             {[
-              "You didn't fly 10 hours to do what every tourist does",
-              "Think about your own city — do YOU go to the tourist spots? Exactly.",
-              "You know you're paying tourist price but have no idea how to avoid it",
-              "You saw those YouTube vids of people traveling with a local friend. You wanted that.",
-              "Every travel tiktoker makes it look easy. It's not.",
-              "You know there's a Seoul beyond the tourist version. You just can't find it.",
+              "10時間もかけて飛んできたのに、他の観光客と同じことしてる",
+              "自分の街を思い出してみて — 観光スポットなんて行かないでしょ？そういうこと。",
+              "観光客価格で払ってるのは分かってる。でも避け方が分からない",
+              "現地の友達と旅するYouTube動画を見た。あれがやりたかった。",
+              "旅行系TikTokerは簡単そうに見せる。実際は全然違う。",
+              "観光客が見るソウルの向こう側があるのは知ってる。ただ、たどり着けないだけ。",
             ].map((line, i) => (
               <ScrollReveal key={i} direction="up" delay={i * 100}>
                 <div
@@ -176,7 +174,7 @@ export default function Home() {
               href="#waitlist"
               className="text-neon text-sm font-bold tracking-wide hover:underline"
             >
-              That's why we built YUKO ↓
+              だからYUKOを作った ↓
             </a>
           </div>
         </div>
@@ -186,46 +184,46 @@ export default function Home() {
       <section className="py-14 md:py-24 px-4 md:px-6 border-t border-white/5 bg-gradient-to-b from-obsidian via-obsidian-soft/30 to-obsidian">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal direction="up" className="text-center mb-10 md:mb-16">
-            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">two seouls</div>
+            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">2つのソウル</div>
             <h2 className="text-3xl md:text-5xl font-bold leading-tight">
-              The Seoul you visited.
+              あなたが訪れたソウル。
               <br />
-              <span className="text-neon italic font-fraunces">The Seoul you'd live in.</span>
+              <span className="text-neon italic font-fraunces">あなたが住みたくなるソウル。</span>
             </h2>
             <p className="text-white/60 mt-6 max-w-2xl mx-auto text-base md:text-lg">
-              Tourists see the top 10 list.
+              観光客が見るのはトップ10リストだけ。
               <br />
-              Locals live between the lines — in alleys, basements, 30-minute detours.
+              地元の人は路地裏、地下、30分の寄り道の中で暮らしてる。
               <br className="hidden md:inline" />
-              <span className="text-neon/80">YUKO gives you the second one.</span>
+              <span className="text-neon/80">YUKOが見せるのは、そっちのソウル。</span>
             </p>
           </ScrollReveal>
 
           <div className="space-y-4">
             {[
               {
-                tourist: "Myeongdong. Gyeongbokgung. N-Tower. Same 3 spots as the 10 million tourists before you. You flew 10 hours for this?",
-                local:   "A rooftop bar in Seongsu that opens 3 weeks a year. Your mate heard about it yesterday. You're on the list.",
+                tourist: "明洞。景福宮。Nタワー。1000万人の観光客と同じ3ヶ所。10時間かけて来た意味ある？",
+                local:   "年に3週間だけオープンする聖水のルーフトップバー。メイトが昨日聞きつけた。リストに入ってる。",
               },
               {
-                tourist: "Googled 'best Korean food'. Waited 2 hours. Sat down. It was mid. The table next to you? All tourists.",
-                local:   "Second alley, no sign, plastic chairs. The owner nods at your mate. You eat what locals actually eat. ₩8,000.",
+                tourist: "「韓国料理 おすすめ」で検索。2時間並んだ。座った。まあまあ。隣のテーブル？全員観光客。",
+                local:   "2本目の路地、看板なし、プラスチックの椅子。オーナーがメイトにうなずく。地元の人が本当に食べてるものを食べる。₩8,000。",
               },
               {
-                tourist: "Walked past the same street 4 times. Didn't know the best café in Seoul was behind that parking lot.",
-                local:   "Your mate texts you: 'trust me, turn left at the laundromat.' You find it. Zero tourists. Just vibes.",
+                tourist: "同じ通りを4回通り過ぎた。ソウルで一番いいカフェが駐車場の裏にあるなんて知らなかった。",
+                local:   "メイトからメッセージ：「信じて、コインランドリーのとこ左に曲がって。」見つけた。観光客ゼロ。最高の空間。",
               },
               {
-                tourist: "Pointed at the menu. Smiled awkwardly. Got charged ₩18,000 for something locals pay ₩9,000 for.",
-                local:   "Your mate orders in Korean. Gets the off-menu thing. The owner gives you a free side dish because you came with a local.",
+                tourist: "メニューを指差した。気まずく笑った。地元の人なら₩9,000のものに₩18,000払った。",
+                local:   "メイトが韓国語で注文する。裏メニューが出てくる。地元の人と来たから、オーナーがサービスでおかずをくれた。",
               },
               {
-                tourist: "K-pop fan event. The signup page? All Korean. You missed it by 2 days.",
-                local:   "Your mate booked it before you even landed. And after? The café where fans actually hang — not the one on Google.",
+                tourist: "K-POPファンイベント。申し込みページ？全部韓国語。2日遅れで見逃した。",
+                local:   "メイトが着く前に予約してくれてた。その後は？ファンが本当に集まるカフェ — Googleに出てくるやつじゃない。",
               },
               {
-                tourist: "Asked a stranger for a photo. Got your forehead and a trash can. That's your Seoul memory.",
-                local:   "Your mate finds the golden hour spot, takes 40 shots, and you finally have a photo that looks like the trip felt.",
+                tourist: "知らない人に写真を頼んだ。写ったのはおでことゴミ箱。それがソウルの思い出。",
+                local:   "メイトがゴールデンアワーのスポットを見つけて、40枚撮ってくれて、やっと旅の感動が伝わる写真が撮れた。",
               },
             ].map((p, i) => (
               <ScrollReveal key={i} direction="up" delay={i * 100}>
@@ -233,7 +231,7 @@ export default function Home() {
                 {/* Tourist */}
                 <div className="bg-obsidian/60 border border-white/10 rounded-2xl p-5 md:p-6 relative">
                   <div className="text-[10px] tracking-widest uppercase text-white/40 font-bold mb-2">
-                    Tourist Seoul
+                    観光客のソウル
                   </div>
                   <p className="text-white/50 text-base md:text-lg italic font-fraunces leading-relaxed">
                     "{p.tourist}"
@@ -249,7 +247,7 @@ export default function Home() {
                 {/* Local / Friend */}
                 <div className="bg-gradient-to-br from-neon/15 via-neon/5 to-transparent border border-neon/40 rounded-2xl p-5 md:p-6 relative">
                   <div className="text-[10px] tracking-widest uppercase text-neon font-bold mb-2">
-                    If you had a friend here
+                    もし友達がいたら
                   </div>
                   <p className="text-off-white text-base md:text-lg leading-relaxed font-medium">
                     {p.local}
@@ -263,21 +261,21 @@ export default function Home() {
           {/* Closing line */}
           <div className="text-center mt-16 space-y-3">
             <p className="font-caveat text-4xl md:text-5xl text-neon leading-tight">
-              You don't need a tour.
+              ツアーはいらない。
               <br />
-              You need a friend.
+              必要なのは、友達。
             </p>
             <p className="text-white/60 text-sm md:text-base italic font-fraunces">
-              The Seoul locals actually live in. Not the one on the map.
+              地元の人が本当に暮らすソウル。地図に載ってるやつじゃない。
             </p>
           </div>
 
           {/* CTA Repetition */}
           <div className="text-center mt-10">
             <a href="/apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
-              Meet your YUKO →
+              YUKOに会う →
             </a>
-            <div className="text-xs text-white/50 mt-2">Takes 30 seconds</div>
+            <div className="text-xs text-white/50 mt-2">30秒で完了</div>
           </div>
         </div>
       </section>
@@ -288,18 +286,18 @@ export default function Home() {
 
         <div className="relative z-10 max-w-5xl mx-auto">
           <ScrollReveal direction="up" className="text-center mb-14">
-            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">built for you</div>
+            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">あなただけのために</div>
             <h2 className="text-3xl md:text-5xl font-bold leading-tight">
-              Not a package.
+              パッケージじゃない。
               <br />
-              <span className="text-neon italic font-fraunces">A day that starts with knowing you.</span>
+              <span className="text-neon italic font-fraunces">あなたを知ることから始まる1日。</span>
             </h2>
             <p className="text-white/60 mt-6 max-w-2xl mx-auto">
-              2 days before you land, your YUKO begins a conversation with you.
+              到着の2日前、あなたのYUKOがチャットを始めます。
               <br />
-              They learn what you love, what you hate, what you're here for.
+              好きなこと、苦手なこと、何をしに来たのかを聞いて、
               <br />
-              <span className="text-neon/80">Then they build a day no one else could get.</span>
+              <span className="text-neon/80">他の誰にも作れない1日をプランニングします。</span>
             </p>
           </ScrollReveal>
 
@@ -309,44 +307,44 @@ export default function Home() {
             <div className="flex items-center gap-2 pb-4 mb-4 border-b border-white/5">
               <div className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
               <span className="text-xs tracking-widest uppercase text-white/60">
-                Chat with your YUKO · 2 days before you land
+                YUKOとチャット · 到着2日前
               </span>
             </div>
 
             <div className="space-y-2.5 text-[14px] md:text-[15px]">
               <div className="flex justify-end">
                 <div className="bg-neon text-obsidian px-4 py-2 rounded-2xl rounded-br-sm max-w-[80%] font-medium">
-                  hiii i land tuesday around 3 🛬
+                  やっほー！火曜の3時頃着くよ 🛬
                 </div>
               </div>
               <div className="flex justify-start">
                 <div className="bg-white/10 px-4 py-2 rounded-2xl rounded-bl-sm max-w-[80%]">
-                  omg ok!! u more into chill cafes or like late night bar vibes
+                  おお了解！！まったりカフェ派？それとも夜のバー派？
                 </div>
               </div>
               <div className="flex justify-end">
                 <div className="bg-neon text-obsidian px-4 py-2 rounded-2xl rounded-br-sm max-w-[80%] font-medium">
-                  honestly both lol 🥲
+                  正直どっちも笑 🥲
                 </div>
               </div>
               <div className="flex justify-start">
                 <div className="bg-white/10 px-4 py-2 rounded-2xl rounded-bl-sm max-w-[80%]">
-                  haha bet. do u watch any kdramas? also any food u cant eat?
+                  いいね笑 韓ドラ見る？あと食べられないものある？
                 </div>
               </div>
               <div className="flex justify-end">
                 <div className="bg-neon text-obsidian px-4 py-2 rounded-2xl rounded-br-sm max-w-[80%] font-medium">
-                  YESSS lovely runner cafe plzzz 🫶 no spicy tho im weak
+                  見てる！！ラブリーランナーのカフェ行きたい 🫶 辛いのは無理だけど笑
                 </div>
               </div>
               <div className="flex justify-start">
                 <div className="bg-white/10 px-4 py-2 rounded-2xl rounded-bl-sm max-w-[80%]">
-                  WAIT i know exactly where that is. ok hear me out theres a ramen spot 4 min from there, zero tourists, ur gonna die 🍜
+                  え待って場所分かる！聞いて、そこから4分のとこにラーメン屋あるんだけど、観光客ゼロで絶対ハマる 🍜
                 </div>
               </div>
               <div className="flex justify-end">
                 <div className="bg-neon text-obsidian px-4 py-2 rounded-2xl rounded-br-sm max-w-[80%] font-medium">
-                  STOP im so excited already 😭
+                  やばいもう楽しみすぎる 😭
                 </div>
               </div>
             </div>
@@ -355,18 +353,18 @@ export default function Home() {
 
           <div className="text-center mt-12">
             <p className="font-caveat text-3xl md:text-4xl text-neon leading-tight">
-              Your Seoul.
+              あなたのソウル。
               <br />
-              Planned around you. By a real friend.
+              本物の友達が、あなたに合わせてプランニング。
             </p>
           </div>
 
           {/* CTA Repetition */}
           <div className="text-center mt-10">
             <a href="/apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
-              Meet your YUKO →
+              YUKOに会う →
             </a>
-            <div className="text-xs text-white/50 mt-2">Takes 30 seconds</div>
+            <div className="text-xs text-white/50 mt-2">30秒で完了</div>
           </div>
         </div>
       </section>
@@ -381,18 +379,18 @@ export default function Home() {
 
         <div className="relative z-10 max-w-5xl mx-auto">
           <ScrollReveal direction="up" className="text-center mb-16">
-            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">how it works</div>
+            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">仕組み</div>
             <h2 className="text-2xl md:text-5xl font-bold">
-              Meet your YUKO in <span className="text-neon">5 steps.</span>
+              <span className="text-neon">5ステップ</span>でYUKOに会える。
             </h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-5 gap-5">
             {[
-              { n: "1", t: "Apply", d: "Fill a 3-minute form with your travel vibe." },
-              { n: "2", t: "Matched", d: "Your peer Korean mate within 24h." },
-              { n: "3", t: "Chat", d: "Plan your custom day — 2 days before you land." },
-              { n: "4", t: "Hang out", d: "Full day together, made for you." },
-              { n: "5", t: "Remember", d: "Photo pack + Korean phrase card after." },
+              { n: "1", t: "申し込む", d: "3分のフォームで旅のスタイルを教えてね。" },
+              { n: "2", t: "マッチング", d: "24時間以内に同世代の韓国人メイトが決定。" },
+              { n: "3", t: "チャット", d: "到着2日前からオーダーメイドの1日をプランニング。" },
+              { n: "4", t: "一緒に過ごす", d: "あなたのための1日を、一緒に。" },
+              { n: "5", t: "思い出", d: "フォトパック＋韓国語フレーズカードをプレゼント。" },
             ].map((s, i) => (
               <ScrollReveal key={i} direction="up" delay={i * 150}>
                 <div
@@ -412,9 +410,9 @@ export default function Home() {
       <section className="py-14 md:py-24 border-t border-white/5">
         <div className="max-w-5xl mx-auto px-4 md:px-6">
           <div className="text-center mb-10 md:mb-14">
-            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">meet the mates</div>
+            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">メイトに会う</div>
             <h2 className="text-2xl md:text-5xl font-bold">
-              Hand-picked. <span className="text-neon">Peer Korean friends.</span>
+              厳選された、<span className="text-neon">同世代の韓国人の友達。</span>
             </h2>
           </div>
         </div>
@@ -433,28 +431,28 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
             </div>
             <div className="p-5 md:p-6 -mt-14 relative z-10">
-              <div className="text-xl font-bold mb-1">Your Host</div>
-              <div className="text-sm text-white/60 mb-3 italic">Founder of YUKO · Seoul</div>
+              <div className="text-xl font-bold mb-1">ホスト</div>
+              <div className="text-sm text-white/60 mb-3 italic">YUKO ファウンダー · ソウル</div>
               <div className="space-y-1.5 text-[13px] bg-obsidian/60 backdrop-blur-sm border border-white/10 rounded-xl p-3.5">
                 <div className="flex gap-2">
                   <span className="text-neon">✦</span>
-                  <span>PR Ambassador, Korea University (고려대학교)</span>
+                  <span>PR大使、高麗大学校（고려대학교）</span>
                 </div>
                 <div className="flex gap-2">
                   <span className="text-neon">✦</span>
-                  <span>Beyond Camp — mentored kids abroad</span>
+                  <span>Beyond Camp — 海外の子どもたちのメンター</span>
                 </div>
                 <div className="flex gap-2">
                   <span className="text-neon">✦</span>
-                  <span>Korean, English · Driver (car available)</span>
+                  <span>韓国語、英語 · 車あり（ドライバー）</span>
                 </div>
                 <div className="flex gap-2">
                   <span className="text-neon">✦</span>
-                  <span>Hidden bars · Han River nights · Local BBQ joints</span>
+                  <span>隠れ家バー · 漢江の夜 · 地元の焼肉屋</span>
                 </div>
               </div>
               <div className="mt-3 text-xs text-white/60 italic font-fraunces">
-                "I traveled solo wishing I had a local friend. So I became one. That's why I founded YUKO."
+                "一人旅で「地元の友達がいたらな」ってずっと思ってた。だから自分がなった。それがYUKOの始まり。"
               </div>
             </div>
           </div>
@@ -471,28 +469,28 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
             </div>
             <div className="p-5 md:p-6 -mt-14 relative z-10">
-              <div className="text-xl font-bold mb-1">Soyeon</div>
-              <div className="text-sm text-white/60 mb-3 italic">YUKO Mate · Seoul</div>
+              <div className="text-xl font-bold mb-1">ソヨン</div>
+              <div className="text-sm text-white/60 mb-3 italic">YUKO メイト · ソウル</div>
               <div className="space-y-1.5 text-[13px] bg-obsidian/60 backdrop-blur-sm border border-white/10 rounded-xl p-3.5">
                 <div className="flex gap-2">
                   <span className="text-neon">✦</span>
-                  <span>Ewha Womans University (이화여대)</span>
+                  <span>梨花女子大学校（이화여대）</span>
                 </div>
                 <div className="flex gap-2">
                   <span className="text-neon">✦</span>
-                  <span>Lived in Tokyo for 2 years</span>
+                  <span>東京在住2年</span>
                 </div>
                 <div className="flex gap-2">
                   <span className="text-neon">✦</span>
-                  <span>Korean, English</span>
+                  <span>韓国語、英語</span>
                 </div>
                 <div className="flex gap-2">
                   <span className="text-neon">✦</span>
-                  <span>Seongsu cafes · K-beauty · Hangang picnics</span>
+                  <span>聖水カフェ · K-ビューティー · 漢江ピクニック</span>
                 </div>
               </div>
               <div className="mt-3 text-xs text-white/60 italic font-fraunces">
-                "I want to show you the Seoul my friends and I actually live in."
+                "私と友達が本当に暮らしてるソウルを見せたい。"
               </div>
             </div>
           </div>
@@ -502,19 +500,19 @@ export default function Home() {
             <div className="w-24 h-24 rounded-full bg-gradient-to-br from-white/10 to-transparent mb-5 flex items-center justify-center border border-white/10">
               <span className="font-caveat text-5xl text-white/30">?</span>
             </div>
-            <div className="text-lg font-bold text-white/50 mb-2">Mate #3</div>
+            <div className="text-lg font-bold text-white/50 mb-2">メイト #3</div>
             <div className="font-caveat text-3xl md:text-4xl text-neon">coming soon</div>
             <div className="text-xs text-white/50 mt-4 text-center leading-relaxed">
-              Hand-picked by founder.
+              ファウンダーが厳選中。
               <br />
-              Dropping soon.
+              もうすぐ公開。
             </div>
           </div>
         </div>
 
         {/* Swipe hint — mobile only */}
         <div className="md:hidden text-center mt-3 text-xs text-white/40 tracking-widest">
-          ← swipe →
+          ← スワイプ →
         </div>
       </section>
 
@@ -522,9 +520,9 @@ export default function Home() {
       <section className="py-16 px-6 border-t border-white/5">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal direction="up" className="text-center mb-10">
-            <div className="font-caveat text-4xl text-neon mb-1">real messages</div>
+            <div className="font-caveat text-4xl text-neon mb-1">リアルな声</div>
             <h2 className="text-2xl md:text-4xl font-bold">
-              After they came home.
+              帰国後のメッセージ。
             </h2>
           </ScrollReveal>
 
@@ -610,19 +608,19 @@ export default function Home() {
           <div className="text-center mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[11px] text-white/50 tracking-widest uppercase">
             <span>🇺🇸🇯🇵🇨🇳🇫🇷🇪🇸🇸🇬🇩🇪🇹🇭</span>
             <span className="text-neon/40">✦</span>
-            <span>18 pilot testers</span>
+            <span>18名のパイロットテスター</span>
             <span className="text-neon/40">✦</span>
             <span>4.9 ★</span>
             <span className="text-neon/40">✦</span>
-            <span className="text-neon font-bold">100% would rebook</span>
+            <span className="text-neon font-bold">100%がリピート希望</span>
           </div>
 
           {/* CTA Repetition */}
           <div className="text-center mt-10">
             <a href="/apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
-              Meet your YUKO →
+              YUKOに会う →
             </a>
-            <div className="text-xs text-white/50 mt-2">Takes 30 seconds</div>
+            <div className="text-xs text-white/50 mt-2">30秒で完了</div>
           </div>
         </div>
       </section>
@@ -637,36 +635,36 @@ export default function Home() {
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <ScrollReveal direction="up">
-            <div className="font-caveat text-5xl text-neon mb-2">our story</div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-10">Why we made YUKO.</h2>
+            <div className="font-caveat text-5xl text-neon mb-2">私たちのストーリー</div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-10">YUKOを作った理由。</h2>
           </ScrollReveal>
           <div className="font-fraunces text-xl md:text-2xl font-light leading-[1.6] text-white/85 space-y-5">
             <ScrollReveal direction="up" delay={100}>
             <p>
-              I love traveling. I hate planning. And I hate being a <em className="italic text-neon">tourist</em>.
+              旅が好き。計画は嫌い。そして<em className="italic text-neon">観光客</em>でいるのも嫌い。
               <br />
-              So I always went where I had a friend — and those trips were{" "}
-              <em className="italic text-neon">unreal</em>.
+              だからいつも友達がいる場所に行ってた — そういう旅は{" "}
+              <em className="italic text-neon">別次元</em>だった。
             </p>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={200}>
             <p>
-              A hidden izakaya in Tokyo. A rooftop in Bangkok nobody posts about.
-              A midnight drive in LA with someone who actually lives there.
+              東京の隠れ家居酒屋。誰もSNSに載せないバンコクのルーフトップ。
+              現地に住んでる人との深夜のLAドライブ。
             </p>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={300}>
             <p>
-              Then I thought — do travelers coming to Korea ever get that?
+              そこでふと思った — 韓国に来る旅行者は、こんな体験ができてるのか？
               <br />
-              The answer was no. They get Myeongdong and a checklist.
+              答えはノーだった。みんな明洞とチェックリストだけ。
               <br />
-              But they don't get <em className="italic text-neon">Seoul</em>.
+              でも<em className="italic text-neon">ソウル</em>は体験できていない。
             </p>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={400}>
             <p className="font-caveat text-4xl text-neon pt-4">
-              I can give them the real thing. That's why I built YUKO.
+              本物を届けられる。だからYUKOを作った。
             </p>
             </ScrollReveal>
           </div>
@@ -674,9 +672,9 @@ export default function Home() {
           {/* CTA Repetition */}
           <div className="text-center mt-10">
             <a href="/apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
-              Meet your YUKO →
+              YUKOに会う →
             </a>
-            <div className="text-xs text-white/50 mt-2">Takes 30 seconds</div>
+            <div className="text-xs text-white/50 mt-2">30秒で完了</div>
           </div>
         </div>
       </section>
@@ -685,38 +683,38 @@ export default function Home() {
       <section className="py-14 md:py-24 px-4 md:px-6 border-t border-white/5">
         <div className="max-w-3xl mx-auto">
           <ScrollReveal direction="up" className="text-center mb-16">
-            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">faq</div>
-            <h2 className="text-2xl md:text-5xl font-bold">Good questions.</h2>
+            <div className="font-caveat text-3xl md:text-5xl text-neon mb-1 md:mb-2">よくある質問</div>
+            <h2 className="text-2xl md:text-5xl font-bold">いい質問ですね。</h2>
           </ScrollReveal>
           <div className="space-y-3">
             {[
               {
-                q: "Is it safe?",
-                a: "All mates are hand-picked by our founder through in-person interviews. First meetings are always in public places. 24-hour emergency line.",
+                q: "安全ですか？",
+                a: "全てのメイトはファウンダーが対面面接で厳選しています。初回の待ち合わせは必ず公共の場所。24時間緊急連絡先あり。",
               },
               {
-                q: "Is this a tour guide service?",
-                a: "No. Your mate is a peer Korean friend. No flag, no script, no group. You decide what you want to do — they know where to go.",
+                q: "ツアーガイドサービスですか？",
+                a: "いいえ。メイトは同世代の韓国人の友達です。旗もなし、台本もなし、団体もなし。何がしたいかはあなたが決めて — どこに行くかはメイトが知ってます。",
               },
               {
-                q: "How is it custom?",
-                a: "2 days before you arrive, your mate chats with you to understand what you love. Then they plan a day just for you. Not a template. Not a package.",
+                q: "どうカスタムなの？",
+                a: "到着の2日前に、メイトがチャットであなたの好みを聞きます。その上であなただけの1日をプランニング。テンプレートじゃない。パッケージでもない。",
               },
               {
-                q: "Can I choose gender preference?",
-                a: "Yes — choose same-gender or no preference when you apply. Your safety and comfort come first.",
+                q: "性別の希望は選べる？",
+                a: "はい — 申し込み時に同性またはこだわりなしを選べます。安全と快適さが最優先です。",
               },
               {
-                q: "What languages?",
-                a: "All mates speak English. Some also speak Japanese, Chinese, or other languages — noted on each profile.",
+                q: "対応言語は？",
+                a: "全メイトが英語対応。日本語、中国語、その他の言語が話せるメイトもいます — プロフィールに記載あり。",
               },
               {
-                q: "How much does it cost?",
-                a: "Half-day (6h): $156 (was $222) · Full-day (10h): $259 (was $370) · 2 days: $441 (was $630). 30% launch special. Price is for 2 people — additional guests or custom requests are discussed in chat. No upfront payment. You only pay after your mate is confirmed.",
+                q: "料金はいくら？",
+                a: "半日（6時間）：$156（約¥23,400）（通常$222）· 終日（10時間）：$259（約¥38,850）（通常$370）· 2日間：$441（約¥66,150）（通常$630）。ローンチ特別30%オフ。料金は2名分 — 追加ゲストやカスタムリクエストはチャットでご相談。事前支払い不要。メイト確定後にお支払い。",
               },
               {
-                q: "When can I book?",
-                a: "Apply now — it takes 30 seconds. We'll match you within 24 hours.",
+                q: "いつ予約できる？",
+                a: "今すぐ申し込めます — 30秒で完了。24時間以内にマッチングします。",
               },
             ].map((item, i) => (
               <ScrollReveal key={i} direction="up" delay={i * 100}>
@@ -751,22 +749,22 @@ export default function Home() {
 
         <ScrollReveal direction="scale" className="relative z-10 max-w-2xl mx-auto text-center">
           <div className="font-caveat text-5xl md:text-7xl text-neon mb-2">
-            ready?
+            準備はいい？
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-            Your Seoul is one chat away.
+            あなたのソウルは、チャットひとつで始まる。
           </h2>
           <p className="text-white/60 text-sm md:text-base mb-10">
-            No payment. No commitment. Just say hi.
+            支払い不要。縛りなし。まずはメッセージを送るだけ。
           </p>
           <a
             href="/apply"
             className="inline-block bg-neon text-obsidian px-10 py-4 rounded-full font-bold text-base hover:scale-105 transition-transform shadow-[0_8px_32px_rgba(243,243,26,0.35)]"
           >
-            Meet your YUKO →
+            YUKOに会う →
           </a>
           <p className="text-center text-xs text-white/50 mt-4">
-            Takes 30 seconds
+            30秒で完了
           </p>
         </ScrollReveal>
       </section>
@@ -785,7 +783,7 @@ export default function Home() {
             <a href="https://www.facebook.com/profile.php?id=61572041466581" target="_blank" rel="noopener" className="hover:text-neon transition-colors">Facebook</a>
             <a href="mailto:youxo@chosim.me" className="hover:text-neon transition-colors">Contact</a>
           </div>
-          <div className="text-xs">© 2026 YUKO · Your friend is here.</div>
+          <div className="text-xs">© 2026 YUKO · あなたの友達がここにいます。</div>
         </div>
       </footer>
     </main>

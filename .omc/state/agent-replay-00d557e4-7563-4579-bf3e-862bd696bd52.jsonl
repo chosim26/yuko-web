@@ -2,3 +2,13 @@
 {"t":0,"agent":"acb85f2","agent_type":"unknown","event":"agent_stop","success":true}
 {"t":0,"agent":"af6d648","agent_type":"unknown","event":"agent_stop","success":true}
 {"t":0,"agent":"a323f3c","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a3f23c2","agent_type":"general-purpose","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a9f31d1","agent_type":"general-purpose","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"abcc8d8","agent_type":"general-purpose","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a6025b3","agent_type":"general-purpose","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"abcc8d8","agent_type":"general-purpose","event":"agent_stop","success":true,"duration_ms":429628}
+{"t":0,"agent":"system","event":"skill_activated","skill_name":"figma-to-code","skill_source":"user"}
+{"t":0,"agent":"a6025b3","agent_type":"general-purpose","event":"agent_stop","success":true,"duration_ms":509374}
+{"t":0,"agent":"abee763","agent_type":"general-purpose","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a2276a1","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a9bf052","agent_type":"general-purpose","event":"agent_start","parent_mode":"none"}
