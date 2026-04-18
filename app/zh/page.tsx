@@ -689,32 +689,32 @@ export default function Home() {
           <div className="space-y-3">
             {[
               {
-                q: "安全ですか？",
-                a: "全てのメイトはファウンダーが対面面接で厳選しています。初回の待ち合わせは必ず公共の場所。24時間緊急連絡先あり。",
+                q: "安全吗？",
+                a: "所有Mate都由创始人面对面面试精选。第一次见面一定在公共场所。24小时紧急联系方式。",
               },
               {
-                q: "ツアーガイドサービスですか？",
-                a: "いいえ。メイトは同世代の韓国人の友達です。旗もなし、台本もなし、団体もなし。何がしたいかはあなたが決めて — どこに行くかはメイトが知ってます。",
+                q: "这是导游服务吗？",
+                a: "不是。Mate是同龄的韩国朋友。没有小旗子，没有台词，没有团队。你来决定想做什么——去哪里Mate知道。",
               },
               {
-                q: "どうカスタムなの？",
-                a: "到着の2日前に、メイトがチャットであなたの好みを聞きます。その上であなただけの1日をプランニング。テンプレートじゃない。パッケージでもない。",
+                q: "怎么定制的？",
+                a: "到达前2天，Mate会在聊天中了解你的喜好。然后为你规划专属的一天。不是模板。也不是套餐。",
               },
               {
-                q: "性別の希望は選べる？",
-                a: "はい — 申し込み時に同性またはこだわりなしを選べます。安全と快適さが最優先です。",
+                q: "可以选择性别偏好吗？",
+                a: "可以——申请时可以选同性或无所谓。安全和舒适是第一位的。",
               },
               {
-                q: "対応言語は？",
-                a: "全メイトが英語対応。日本語、中国語、その他の言語が話せるメイトもいます — プロフィールに記載あり。",
+                q: "支持什么语言？",
+                a: "所有Mate都会英语。部分Mate会中文、日语或其他语言——在个人资料中有标注。",
               },
               {
-                q: "料金はいくら？",
-                a: "半日（6時間）：$156（約¥23,400）（通常$222）· 終日（10時間）：$259（約¥38,850）（通常$370）· 2日間：$441（約¥66,150）（通常$630）。ローンチ特別30%オフ。料金は2名分 — 追加ゲストやカスタムリクエストはチャットでご相談。事前支払い不要。メイト確定後にお支払い。",
+                q: "费用是多少？",
+                a: "半天（6小时）：$156（约¥1,130）（原价$222）· 全天（10小时）：$259（约¥1,880）（原价$370）· 两天：$441（约¥3,200）（原价$630）。上线特惠7折。费用含2人——加人或定制需求可以聊天沟通。无需预付。匹配成功后再付款。",
               },
               {
-                q: "いつ予約できる？",
-                a: "今すぐ申し込めます — 30秒搞定。24時間以内にマッチングします。",
+                q: "什么时候可以预约？",
+                a: "现在就可以申请——30秒搞定。24小时内完成匹配。",
               },
             ].map((item, i) => (
               <ScrollReveal key={i} direction="up" delay={i * 100}>
@@ -749,19 +749,19 @@ export default function Home() {
 
         <ScrollReveal direction="scale" className="relative z-10 max-w-2xl mx-auto text-center">
           <div className="font-caveat text-5xl md:text-7xl text-neon mb-2">
-            準備はいい？
+            准备好了吗？
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-            あなたのソウルは、チャットひとつで始まる。
+            你的首尔，一条消息就能开始。
           </h2>
           <p className="text-white/60 text-sm md:text-base mb-10">
-            支払い不要。縛りなし。まずはメッセージを送るだけ。
+            无需付款。没有绑定。先发条消息就好。
           </p>
           <a
             href="/apply"
             className="inline-block bg-neon text-obsidian px-10 py-4 rounded-full font-bold text-base hover:scale-105 transition-transform shadow-[0_8px_32px_rgba(243,243,26,0.35)]"
           >
-            YUKOに会う →
+            认识你的YUKO →
           </a>
           <p className="text-center text-xs text-white/50 mt-4">
             30秒搞定
@@ -783,7 +783,7 @@ export default function Home() {
             <a href="https://www.facebook.com/profile.php?id=61572041466581" target="_blank" rel="noopener" className="hover:text-neon transition-colors">Facebook</a>
             <a href="mailto:youxo@chosim.me" className="hover:text-neon transition-colors">Contact</a>
           </div>
-          <div className="text-xs">© 2026 YUKO · あなたの友達がここにいます。</div>
+          <div className="text-xs">© 2026 YUKO · 你的朋友在这里。</div>
         </div>
       </footer>
     </main>
