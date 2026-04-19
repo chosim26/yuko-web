@@ -253,7 +253,7 @@ export default function ApplyPage() {
                 <input
                   type="date"
                   name="arrival_date"
-                  lang="en"
+                  lang={locale}
                   required
                   className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-3.5 text-off-white focus:outline-none focus:border-neon transition-colors [color-scheme:dark]"
                 />
