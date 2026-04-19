@@ -126,6 +126,13 @@ export default function ApplyPage() {
     const vibes: string[] = [];
     fd.getAll("vibes").forEach((v) => vibes.push(v as string));
 
+    // Capture UTM params (from ad click URL)
+    const urlParams = new URLSearchParams(window.location.search);
+    const referrerParams = new URLSearchParams(document.referrer?.split("?")[1] || "");
+    // Try current URL first, then check sessionStorage (saved from landing)
+    const getUtm = (key: string) =>
+      urlParams.get(key) || sessionStorage.getItem(key) || referrerParams.get(key) || "";
+
     const payload = {
       name: fd.get("name"),
       email: fd.get("email"),
@@ -135,6 +142,13 @@ export default function ApplyPage() {
       contact_handle: fd.get("contact_handle"),
       vibes,
       gender_preference: fd.get("gender_preference"),
+      // UTM tracking — 어떤 광고에서 왔는지
+      utm_source: getUtm("utm_source"),
+      utm_medium: getUtm("utm_medium"),
+      utm_campaign: getUtm("utm_campaign"),
+      utm_content: getUtm("utm_content"),
+      landing_url: sessionStorage.getItem("landing_url") || document.referrer || "",
+      locale,
     };
 
     try {

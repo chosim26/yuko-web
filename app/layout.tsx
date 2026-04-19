@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Serif, Fraunces, Caveat } from "next/font/google";
 import Script from "next/script";
+import UtmCapture from "./components/utm-capture";
 import "./globals.css";
 
 const inter = Inter({
@@ -72,7 +73,7 @@ export default function RootLayout({
           />
         </noscript>
       </head>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans"><UtmCapture />{children}</body>
     </html>
   );
 }

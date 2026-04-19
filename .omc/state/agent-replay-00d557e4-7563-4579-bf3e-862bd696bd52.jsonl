@@ -15,3 +15,5 @@
 {"t":0,"agent":"a9bf052","agent_type":"general-purpose","event":"agent_stop","success":true,"duration_ms":431034}
 {"t":0,"agent":"system","event":"skill_activated","skill_name":"content","skill_source":"user"}
 {"t":0,"agent":"a26301d","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a34097b","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a6a9337","agent_type":"unknown","event":"agent_stop","success":true}
