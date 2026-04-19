@@ -1,14 +1,98 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3aBcoWlv6iQPYSClCYbwVJFfqB3AN6eZbpLoJ0e0ejYYw1L96mDbYzy1eXbziASnJ/exec";
 
+type Locale = "en" | "ja" | "zh";
+
+const t = {
+  en: {
+    back: "← Back",
+    title: "apply now",
+    heading: "Your Seoul starts here.",
+    sub: "Takes 30 seconds · No payment required",
+    name: "Your name",
+    namePh: "First name",
+    email: "Email",
+    emailPh: "your@email.com",
+    gender: "Your gender",
+    male: "Male", female: "Female", other: "Other",
+    arrival: "When do you land in Seoul?",
+    contact: "How should we reach you?",
+    contactPh: "Your @handle or number",
+    vibeTitle: "What's your vibe?",
+    vibeSub: "(pick any)",
+    vibes: ["Chill cafes", "Bar hopping", "K-drama spots", "Street food crawl", "K-beauty shopping", "Hidden local spots"],
+    matePref: "Mate gender preference",
+    sameGender: "Same gender", noPref: "No preference",
+    submit: "Meet your YUKO →",
+    sending: "Sending...",
+    micro: "Takes 30 seconds · No payment required",
+  },
+  ja: {
+    back: "← 戻る",
+    title: "今すぐ申し込む",
+    heading: "あなたのソウルがここから始まる。",
+    sub: "30秒で完了 · お支払い不要",
+    name: "お名前",
+    namePh: "名前",
+    email: "メール",
+    emailPh: "your@email.com",
+    gender: "性別",
+    male: "男性", female: "女性", other: "その他",
+    arrival: "ソウル到着日は？",
+    contact: "連絡方法を選んでください",
+    contactPh: "@ハンドルまたは電話番号",
+    vibeTitle: "どんな旅がしたい？",
+    vibeSub: "(複数選択OK)",
+    vibes: ["カフェ巡り", "バーホッピング", "Kドラマスポット", "ストリートフード", "Kビューティー", "隠れた名所"],
+    matePref: "メイトの性別希望",
+    sameGender: "同性", noPref: "希望なし",
+    submit: "YUKOに会う →",
+    sending: "送信中...",
+    micro: "30秒で完了 · お支払い不要",
+  },
+  zh: {
+    back: "← 返回",
+    title: "立即申请",
+    heading: "你的首尔从这里开始。",
+    sub: "只需30秒 · 无需付款",
+    name: "你的名字",
+    namePh: "名字",
+    email: "邮箱",
+    emailPh: "your@email.com",
+    gender: "你的性别",
+    male: "男", female: "女", other: "其他",
+    arrival: "你什么时候到首尔？",
+    contact: "我们怎么联系你？",
+    contactPh: "你的@账号或手机号",
+    vibeTitle: "你喜欢什么风格？",
+    vibeSub: "(可多选)",
+    vibes: ["悠闲咖啡", "酒吧夜生活", "韩剧打卡地", "街头美食", "K-Beauty购物", "本地隐藏景点"],
+    matePref: "Mate性别偏好",
+    sameGender: "同性", noPref: "无偏好",
+    submit: "认识你的YUKO →",
+    sending: "提交中...",
+    micro: "只需30秒 · 无需付款",
+  },
+};
+
+const vibeValues = ["chill-cafes", "bar-hopping", "kdrama-spots", "street-food", "kbeauty", "hidden-local"];
+
 export default function ApplyPage() {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
+  const [locale, setLocale] = useState<Locale>("en");
   const applyBg = "/photos/apply-bg.jpg";
+
+  useEffect(() => {
+    const match = document.cookie.match(/locale=(en|ja|zh)/);
+    if (match) setLocale(match[1] as Locale);
+  }, []);
+
+  const l = t[locale];
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -57,10 +141,10 @@ export default function ApplyPage() {
         <div className="relative z-10 max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-10">
             <a
-              href="/"
+              href={locale === "en" ? "/" : `/${locale}`}
               className="text-sm text-white/60 hover:text-neon transition-colors"
             >
-              ← Back
+              {l.back}
             </a>
             <div className="font-caveat text-3xl tracking-tight">
               y<span className="text-neon">u</span>ko
@@ -70,13 +154,13 @@ export default function ApplyPage() {
 
           <div className="text-center">
             <div className="font-caveat text-5xl md:text-7xl text-neon mb-2">
-              apply now
+              {l.title}
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-              Your Seoul starts here.
+              {l.heading}
             </h2>
             <p className="text-white/60 text-sm md:text-base mb-10">
-              Takes 30 seconds · No payment required
+              {l.sub}
             </p>
           </div>
 
@@ -85,25 +169,25 @@ export default function ApplyPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs text-white/60 tracking-widest uppercase mb-2 font-bold">
-                  Your name
+                  {l.name}
                 </label>
                 <input
                   type="text"
                   name="name"
                   required
-                  placeholder="First name"
+                  placeholder={l.namePh}
                   className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-3.5 text-off-white placeholder:text-white/40 focus:outline-none focus:border-neon transition-colors"
                 />
               </div>
               <div>
                 <label className="block text-xs text-white/60 tracking-widest uppercase mb-2 font-bold">
-                  Email
+                  {l.email}
                 </label>
                 <input
                   type="email"
                   name="email"
                   required
-                  placeholder="your@email.com"
+                  placeholder={l.emailPh}
                   className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-3.5 text-off-white placeholder:text-white/40 focus:outline-none focus:border-neon transition-colors"
                 />
               </div>
@@ -113,13 +197,13 @@ export default function ApplyPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs text-white/60 tracking-widest uppercase mb-2 font-bold">
-                  Your gender
+                  {l.gender}
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {[
-                    { value: "male", label: "Male" },
-                    { value: "female", label: "Female" },
-                    { value: "other", label: "Other" },
+                    { value: "male", label: l.male },
+                    { value: "female", label: l.female },
+                    { value: "other", label: l.other },
                   ].map((g) => (
                     <label key={g.value} className="relative cursor-pointer">
                       <input
@@ -138,7 +222,7 @@ export default function ApplyPage() {
               </div>
               <div>
                 <label className="block text-xs text-white/60 tracking-widest uppercase mb-2 font-bold">
-                  When do you land in Seoul?
+                  {l.arrival}
                 </label>
                 <input
                   type="date"
@@ -153,7 +237,7 @@ export default function ApplyPage() {
             {/* Contact method */}
             <div>
               <label className="block text-xs text-white/60 tracking-widest uppercase mb-2 font-bold">
-                How should we reach you?
+                {l.contact}
               </label>
               <div className="flex flex-wrap gap-2 mb-3">
                 {[
@@ -162,7 +246,7 @@ export default function ApplyPage() {
                   { value: "whatsapp", label: "WhatsApp" },
                   { value: "kakaotalk", label: "KakaoTalk" },
                   { value: "line", label: "Line" },
-                  { value: "other", label: "Other" },
+                  { value: "other", label: l.other },
                 ].map((c) => (
                   <label key={c.value} className="relative cursor-pointer">
                     <input
@@ -182,7 +266,7 @@ export default function ApplyPage() {
                 type="text"
                 name="contact_handle"
                 required
-                placeholder="Your @handle or number"
+                placeholder={l.contactPh}
                 className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-3.5 text-off-white placeholder:text-white/40 focus:outline-none focus:border-neon transition-colors"
               />
             </div>
@@ -190,29 +274,22 @@ export default function ApplyPage() {
             {/* Vibe chips */}
             <div>
               <label className="block text-xs text-white/60 tracking-widest uppercase mb-3 font-bold">
-                What&apos;s your vibe?{" "}
+                {l.vibeTitle}{" "}
                 <span className="normal-case tracking-normal font-normal">
-                  (pick any)
+                  {l.vibeSub}
                 </span>
               </label>
               <div className="flex flex-wrap gap-2.5">
-                {[
-                  { value: "chill-cafes", label: "Chill cafes" },
-                  { value: "bar-hopping", label: "Bar hopping" },
-                  { value: "kdrama-spots", label: "K-drama spots" },
-                  { value: "street-food", label: "Street food crawl" },
-                  { value: "kbeauty", label: "K-beauty shopping" },
-                  { value: "hidden-local", label: "Hidden local spots" },
-                ].map((vibe) => (
-                  <label key={vibe.value} className="relative cursor-pointer">
+                {vibeValues.map((value, i) => (
+                  <label key={value} className="relative cursor-pointer">
                     <input
                       type="checkbox"
                       name="vibes"
-                      value={vibe.value}
+                      value={value}
                       className="peer sr-only"
                     />
                     <span className="inline-flex items-center min-h-[44px] px-4 py-2 rounded-full border text-sm font-medium transition-all bg-white/10 border-white/15 text-white/80 peer-checked:bg-neon peer-checked:text-obsidian peer-checked:border-neon peer-checked:font-bold hover:border-white/30">
-                      {vibe.label}
+                      {l.vibes[i]}
                     </span>
                   </label>
                 ))}
@@ -222,12 +299,12 @@ export default function ApplyPage() {
             {/* Mate gender preference */}
             <div>
               <label className="block text-xs text-white/60 tracking-widest uppercase mb-3 font-bold">
-                Mate gender preference
+                {l.matePref}
               </label>
               <div className="flex flex-wrap gap-3">
                 {[
-                  { value: "same-gender", label: "Same gender" },
-                  { value: "no-preference", label: "No preference" },
+                  { value: "same-gender", label: l.sameGender, icon: "👤" },
+                  { value: "no-preference", label: l.noPref, icon: "👥" },
                 ].map((opt) => (
                   <label key={opt.value} className="relative cursor-pointer">
                     <input
@@ -237,8 +314,7 @@ export default function ApplyPage() {
                       className="peer sr-only"
                     />
                     <span className="inline-flex items-center min-h-[44px] px-5 py-2 rounded-full border text-sm font-medium transition-all bg-white/10 border-white/15 text-white/80 peer-checked:bg-neon peer-checked:text-obsidian peer-checked:border-neon peer-checked:font-bold hover:border-white/30">
-                      {opt.value === "same-gender" ? "👤 " : "👥 "}
-                      {opt.label}
+                      {opt.icon} {opt.label}
                     </span>
                   </label>
                 ))}
@@ -251,10 +327,10 @@ export default function ApplyPage() {
               disabled={submitting}
               className="w-full bg-neon text-obsidian py-4 rounded-full font-bold text-base hover:scale-[1.02] transition-transform shadow-[0_8px_32px_rgba(243,243,26,0.3)] disabled:opacity-60 disabled:hover:scale-100"
             >
-              {submitting ? "Sending..." : "Meet your YUKO →"}
+              {submitting ? l.sending : l.submit}
             </button>
             <p className="text-center text-xs text-white/50 -mt-2">
-              Takes 30 seconds · No payment required
+              {l.micro}
             </p>
           </form>
         </div>
