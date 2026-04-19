@@ -2,6 +2,7 @@
 
 import { useState, useEffect, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "@/lib/track";
 
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3aBcoWlv6iQPYSClCYbwVJFfqB3AN6eZbpLoJ0e0ejYYw1L96mDbYzy1eXbziASnJ/exec";
 
@@ -94,6 +95,11 @@ export default function ApplyPage() {
 
   const l = t[locale];
 
+  // Track /apply page view
+  useEffect(() => {
+    track("ViewContent", { content_name: "apply_form" });
+  }, []);
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
@@ -122,8 +128,12 @@ export default function ApplyPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      // Track successful lead
+      track("Lead", { content_name: "apply_submit", value: 0, currency: "USD" });
       router.push("/apply/thanks");
     } catch {
+      // Track even on catch (no-cors always lands here but submission works)
+      track("Lead", { content_name: "apply_submit", value: 0, currency: "USD" });
       router.push("/apply/thanks");
     }
   }
