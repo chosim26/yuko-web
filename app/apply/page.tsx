@@ -89,8 +89,24 @@ export default function ApplyPage() {
   const applyBg = "/photos/apply-bg.jpg";
 
   useEffect(() => {
+    // 1) URL ?lang= param (from ads)
+    const params = new URLSearchParams(window.location.search);
+    const langParam = params.get("lang");
+    if (langParam && ["en", "ja", "zh"].includes(langParam)) {
+      setLocale(langParam as Locale);
+      document.cookie = `locale=${langParam};path=/;max-age=${60 * 60 * 24 * 365}`;
+      return;
+    }
+    // 2) Cookie (from middleware or language switcher)
     const match = document.cookie.match(/locale=(en|ja|zh)/);
-    if (match) setLocale(match[1] as Locale);
+    if (match) {
+      setLocale(match[1] as Locale);
+      return;
+    }
+    // 3) Browser language fallback
+    const browserLang = navigator.language?.slice(0, 2);
+    if (browserLang === "ja") setLocale("ja");
+    else if (browserLang === "zh") setLocale("zh");
   }, []);
 
   const l = t[locale];
