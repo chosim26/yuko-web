@@ -21,3 +21,12 @@
 {"t":0,"agent":"system","event":"skill_activated","skill_name":"figma-to-code","skill_source":"user"}
 {"t":0,"agent":"ae22273","agent_type":"unknown","event":"agent_stop","success":true}
 {"t":0,"agent":"aef00f2","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a1c019a","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a27fc06","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"system","event":"skill_activated","skill_name":"content","skill_source":"user"}
+{"t":0,"agent":"a47a674","agent_type":"general-purpose","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a47a674","agent_type":"general-purpose","event":"agent_stop","success":true,"duration_ms":51119}
+{"t":0,"agent":"a0385a2","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"system","event":"skill_activated","skill_name":"content","skill_source":"user"}
+{"t":0,"agent":"ad3c97b","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"ad509f0","agent_type":"unknown","event":"agent_stop","success":true}
