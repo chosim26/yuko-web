@@ -786,6 +786,7 @@ export default function Home() {
           </div>
           <div className="flex gap-6">
             <a href="https://www.instagram.com/yuko_seoul/" target="_blank" rel="noopener" className="hover:text-neon transition-colors">Instagram</a>
+            <a href="https://wa.me/821083268528" target="_blank" rel="noopener" className="hover:text-neon transition-colors">WhatsApp</a>
             <a href="https://www.facebook.com/profile.php?id=61572041466581" target="_blank" rel="noopener" className="hover:text-neon transition-colors">Facebook</a>
             <a href="mailto:youxo@chosim.me" className="hover:text-neon transition-colors">Contact</a>
           </div>
