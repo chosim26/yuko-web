@@ -53,6 +53,18 @@ export default function RootLayout({
       className={`${inter.variable} ${instrument.variable} ${fraunces.variable} ${caveat.variable}`}
     >
       <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-GPPRZJTMZP"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GPPRZJTMZP');
+          `}
+        </Script>
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
