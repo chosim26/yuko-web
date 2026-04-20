@@ -17,3 +17,7 @@
 {"t":0,"agent":"a26301d","agent_type":"unknown","event":"agent_stop","success":true}
 {"t":0,"agent":"a34097b","agent_type":"unknown","event":"agent_stop","success":true}
 {"t":0,"agent":"a6a9337","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a492560","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"system","event":"skill_activated","skill_name":"figma-to-code","skill_source":"user"}
+{"t":0,"agent":"ae22273","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"aef00f2","agent_type":"unknown","event":"agent_stop","success":true}

@@ -32,7 +32,7 @@ export default function StickyCta() {
           <div className="text-[10px] text-white/50">Free · 30 seconds</div>
         </div>
         <a
-          href="/apply"
+          href="#apply"
           className="bg-neon text-obsidian px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-transform"
         >
           I&apos;m in →

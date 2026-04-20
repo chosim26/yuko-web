@@ -1,6 +1,7 @@
 import ScrollReveal from "./components/scroll-reveal";
 import StickyCta from "./components/sticky-cta";
 import LanguageSwitcher from "./components/language-switcher";
+import ApplyModal from "./components/apply-modal";
 
 export default function Home() {
   // 9-image slideshow (hero). 4.2s × 9 = 37.8s loop with crossfade.
@@ -34,7 +35,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <LanguageSwitcher current="en" />
             <a
-              href="/apply"
+              href="#apply"
               className="bg-neon text-obsidian px-5 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform"
             >
               Meet your YUKO
@@ -91,7 +92,7 @@ export default function Home() {
           </p>
           <div className="mb-8 md:mb-10">
             <a
-              href="/apply"
+              href="#apply"
               className="inline-block bg-neon text-obsidian px-8 md:px-10 py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base shadow-[0_8px_32px_rgba(243,243,26,0.35)] hover:scale-105 transition-transform"
             >
               Meet your YUKO →
@@ -274,7 +275,7 @@ export default function Home() {
 
           {/* CTA Repetition */}
           <div className="text-center mt-10">
-            <a href="/apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
+            <a href="#apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
               Meet your YUKO →
             </a>
             <div className="text-xs text-white/50 mt-2">Takes 30 seconds</div>
@@ -363,7 +364,7 @@ export default function Home() {
 
           {/* CTA Repetition */}
           <div className="text-center mt-10">
-            <a href="/apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
+            <a href="#apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
               Meet your YUKO →
             </a>
             <div className="text-xs text-white/50 mt-2">Takes 30 seconds</div>
@@ -619,7 +620,7 @@ export default function Home() {
 
           {/* CTA Repetition */}
           <div className="text-center mt-10">
-            <a href="/apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
+            <a href="#apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
               Meet your YUKO →
             </a>
             <div className="text-xs text-white/50 mt-2">Takes 30 seconds</div>
@@ -673,7 +674,7 @@ export default function Home() {
 
           {/* CTA Repetition */}
           <div className="text-center mt-10">
-            <a href="/apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
+            <a href="#apply" className="inline-block bg-neon text-obsidian px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
               Meet your YUKO →
             </a>
             <div className="text-xs text-white/50 mt-2">Takes 30 seconds</div>
@@ -760,7 +761,7 @@ export default function Home() {
             No payment. No commitment. Just say hi.
           </p>
           <a
-            href="/apply"
+            href="#apply"
             className="inline-block bg-neon text-obsidian px-10 py-4 rounded-full font-bold text-base hover:scale-105 transition-transform shadow-[0_8px_32px_rgba(243,243,26,0.35)]"
           >
             Meet your YUKO →
@@ -773,6 +774,9 @@ export default function Home() {
 
       {/* STICKY MOBILE CTA — appears after scrolling past hero */}
       <StickyCta />
+
+      {/* APPLY MODAL — bottom sheet funnel */}
+      <ApplyModal />
 
       {/* FOOTER */}
       <footer className="py-12 px-6 border-t border-white/5 bg-obsidian">

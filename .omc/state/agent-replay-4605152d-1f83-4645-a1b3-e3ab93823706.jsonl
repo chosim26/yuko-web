@@ -5,3 +5,9 @@
 {"t":0,"agent":"a7aef81","agent_type":"unknown","event":"agent_stop","success":true}
 {"t":0,"agent":"ab26aed","agent_type":"unknown","event":"agent_stop","success":true}
 {"t":0,"agent":"aecd848","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a651ab3","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a0523d1","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a48bc5b","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"system","event":"skill_activated","skill_name":"figma-to-code","skill_source":"user"}
+{"t":0,"agent":"aa1a837","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a38a4fb","agent_type":"unknown","event":"agent_stop","success":true}
