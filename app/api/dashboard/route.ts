@@ -171,6 +171,41 @@ export async function GET() {
   const leadDateLabels = JSON.stringify(Object.keys(leadsByDate).sort());
   const leadDateValues = JSON.stringify(Object.keys(leadsByDate).sort().map(k => leadsByDate[k]));
 
+  // Daily log table
+  let runningSpend = 0;
+  let runningLeads = 0;
+  const dailyLogTable = sortedDaily.map((r: InsightRow) => {
+    const date = r.date_start || "";
+    const imp = parseInt(r.impressions || "0");
+    const clk = parseInt(r.clicks || "0");
+    const lc = xact(r.actions, "link_click");
+    const lpv = xact(r.actions, "landing_page_view");
+    const spend = parseInt(String(parseFloat(r.spend || "0")));
+    const ctr = parseFloat(r.ctr || "0");
+    const cpc = lc ? (spend / lc) : 0;
+    const leads = leadsByDate[date] || 0;
+    const dayCac = leads ? (spend / leads) : 0;
+    runningSpend += spend;
+    runningLeads += leads;
+    const cumCac = runningLeads ? (runningSpend / runningLeads) : 0;
+    const ctrBadge = ctr >= 3 ? "good" : (ctr < 1.5 ? "bad" : "ok");
+    const leadCell = leads > 0 ? `<span style="color:#4ade80;font-weight:700">${leads}</span>` : `<span style="color:#555">0</span>`;
+    return `<tr>
+      <td><strong>${date.slice(5)}</strong></td>
+      <td>${imp.toLocaleString()}</td>
+      <td>${lc}</td>
+      <td>${lpv}</td>
+      <td>${spend.toLocaleString()}원</td>
+      <td><span class="badge ${ctrBadge}">${ctr.toFixed(1)}%</span></td>
+      <td>${cpc ? cpc.toFixed(0) + "원" : "-"}</td>
+      <td>${leadCell}</td>
+      <td>${dayCac ? dayCac.toLocaleString(undefined, {maximumFractionDigits:0}) + "원" : "-"}</td>
+      <td style="color:#888">${runningSpend.toLocaleString()}원</td>
+      <td style="color:#888">${runningLeads}</td>
+      <td style="color:${cumCac && cumCac < 30000 ? '#4ade80' : '#fbbf24'}">${cumCac ? cumCac.toLocaleString(undefined, {maximumFractionDigits:0}) + "원" : "∞"}</td>
+    </tr>`;
+  }).join("");
+
   const html = `<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -303,6 +338,36 @@ tr:hover{background:#1a1a1a}
 <div class="grid g2" style="margin-top:16px">
     <div class="chart-box"><h3>연락 방법</h3><canvas id="contactChart"></canvas></div>
     <div class="chart-box"><h3>유입 경로 (UTM)</h3><canvas id="utmChart"></canvas></div>
+</div>
+
+<!-- 일별 핵심지표 로그 -->
+<div class="section" style="margin-top:32px">
+    <h2>일별 핵심지표 로그</h2>
+    <p style="color:#666;font-size:12px;margin-bottom:12px">매일 쌓이는 광고 성과 + 실제 신청자 데이터. 누적 CAC 트렌드를 봐야 합니다.</p>
+    <div style="overflow-x:auto">
+    <table>
+        <tr>
+            <th>날짜</th><th>노출</th><th>링크클릭</th><th>랜딩도착</th><th>지출</th>
+            <th>클릭률</th><th>클릭당비용</th><th>신청자</th><th>당일CAC</th>
+            <th style="color:#666">누적지출</th><th style="color:#666">누적신청</th><th style="color:#666">누적CAC</th>
+        </tr>
+        ${dailyLogTable}
+        <tr style="border-top:2px solid #F3F31A33;font-weight:700;background:#1a1a00">
+            <td>합계</td>
+            <td>${totalImp.toLocaleString()}</td>
+            <td>${totalLc}</td>
+            <td>${totalLpv}</td>
+            <td>${totalSpend.toLocaleString()}원</td>
+            <td>${totalCtr.toFixed(1)}%</td>
+            <td>${totalCpc.toFixed(0)}원</td>
+            <td style="color:#4ade80">${totalLeads}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="color:${cacColor}">${realCac ? realCac.toLocaleString(undefined, {maximumFractionDigits:0}) + "원" : "∞"}</td>
+        </tr>
+    </table>
+    </div>
 </div>
 
 <!-- 마켓별 성과 -->
