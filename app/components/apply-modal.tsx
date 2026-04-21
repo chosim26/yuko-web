@@ -142,6 +142,11 @@ export default function ApplyModal() {
       contact_handle: contactHandle,
       vibes: vibes.includes("other") ? [...vibes.filter(v => v !== "other"), `other: ${otherText}`] : vibes,
       gender_preference: "",
+      utm_source: sessionStorage.getItem("utm_source") || "",
+      utm_medium: sessionStorage.getItem("utm_medium") || "",
+      utm_campaign: sessionStorage.getItem("utm_campaign") || "",
+      utm_content: sessionStorage.getItem("utm_content") || "",
+      landing_url: sessionStorage.getItem("landing_url") || "",
     };
 
     try {
