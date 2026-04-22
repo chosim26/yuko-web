@@ -4,18 +4,20 @@ import LanguageSwitcher from "./components/language-switcher";
 import ApplyModal from "./components/apply-modal";
 
 export default function Home() {
-  // 9-image slideshow (hero). 4.2s × 9 = 37.8s loop with crossfade.
+  // 10-image slideshow (hero). 4.2s × 10 = 42s loop with crossfade.
   // `pos` = CSS background-position (which part of the image stays in frame).
+  // Theme: hidden/locals-only spots — places guidebooks don't cover.
   const heroSlides = [
-    { src: "/photos/namsan-real.jpg",            label: "Namsan Tower",         sub: "남산타워 · Seoul",          pos: "center" },
-    { src: "/photos/g-oliveyoung-2.jpg",       label: "Olive Young",          sub: "K-Beauty",                  pos: "center" },
-    { src: "/photos/g-kpop-3.jpg",             label: "K-Pop Concert",        sub: "World Cup Stadium",         pos: "center" },
-    { src: "/photos/g-seongsu-3.jpg",          label: "Seongsu Pop-up",       sub: "성수 · Seoul My Soul",      pos: "center" },
-    { src: "/photos/u-02-hongdae-walk.png",    label: "Hongdae",              sub: "홍대 · Night walk",         pos: "center" },
-    { src: "/photos/g-tteok-1.jpg",            label: "Tteokbokki",           sub: "떡볶이 · Pojangmacha",      pos: "center" },
-    { src: "/photos/u-03-bbq-cheers.png",      label: "Samgyeopsal",          sub: "삼겹살 · Soju cheers",      pos: "center" },
-    { src: "/photos/u-01-gyeongbokgung.png",   label: "Gyeongbokgung",        sub: "경복궁 · Palace",           pos: "center" },
-    { src: "/photos/u-04-hangang-fountain.png",label: "Banpo Rainbow",        sub: "반포대교 · Fountain",       pos: "center" },
+    { src: "/photos/yuko-hero-namsan-view.jpg",  label: "Namsan",          sub: "남산 · Where locals watch it",  pos: "center" },
+    { src: "/photos/g-oliveyoung-2.jpg",         label: "K-Beauty",        sub: "Indie picks, not the brands",   pos: "center" },
+    { src: "/photos/g-kpop-3.jpg",               label: "K-Pop",           sub: "Underground showcase",          pos: "center" },
+    { src: "/photos/yuko-hero-izakaya.jpg",      label: "Izakaya",         sub: "이자카야 · 동네 단골집",       pos: "center" },
+    { src: "/photos/yuko-hero-hongdae-beer.jpg", label: "Hongdae",         sub: "홍대 · Back alley only",        pos: "center" },
+    { src: "/photos/yuko-hero-bookstore.jpg",    label: "Indie Bookstore", sub: "동네 책방 · Quiet corner",      pos: "center" },
+    { src: "/photos/u-03-bbq-cheers.png",        label: "Samgyeopsal",     sub: "삼겹살 · Local BBQ pick",       pos: "center" },
+    { src: "/photos/u-01-gyeongbokgung.png",     label: "Gyeongbokgung",   sub: "경복궁 · Dawn, no crowds",      pos: "center" },
+    { src: "/photos/yuko-hero-hangang-ski.jpg",  label: "Hangang",         sub: "한강 · Locals-only ride",       pos: "center" },
+    { src: "/photos/yuko-hero-yongsan-park.jpg", label: "Yongsan Park",    sub: "용산 · Quiet brick-wall walk",  pos: "center" },
   ];
 
   const chatBg = "/photos/01-seoul-night.jpg";
