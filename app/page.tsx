@@ -713,7 +713,7 @@ export default function Home() {
               },
               {
                 q: "How much does it cost?",
-                a: "Half-day (6h): $156 (was $222) · Full-day (10h): $259 (was $370) · 2 days: $441 (was $630). 30% launch special. Price is for 2 people — additional guests or custom requests are discussed in chat. No upfront payment. You only pay after your mate is confirmed.",
+                a: "Half-day (6h min): $129 (was $222) · Full-day (10h): $219 (was $370) · 2 days: $349 (was $630). Up to 40% launch special. The 6h is a guaranteed minimum — not a hard stop, so your day naturally runs longer if the vibe's right. Price is for 2 people — additional guests or custom requests are discussed in chat. No upfront payment. You only pay after your mate is confirmed.",
               },
               {
                 q: "When can I book?",
