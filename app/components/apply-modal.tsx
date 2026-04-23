@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, KeyboardEvent } from "react";
-import { track } from "@/lib/track";
+import { track, fireLead } from "@/lib/track";
 
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3aBcoWlv6iQPYSClCYbwVJFfqB3AN6eZbpLoJ0e0ejYYw1L96mDbYzy1eXbziASnJ/exec";
 
@@ -160,7 +160,8 @@ export default function ApplyModal() {
       // no-cors always catches but submission works
     }
 
-    track("Lead", { content_name: "apply_submit", value: 0, currency: "USD" });
+    // Client Pixel + server CAPI in parallel, dedup'd via eventID
+    fireLead({ contactMethod, contactHandle });
     setSubmitting(false);
     setDone(true);
   }
