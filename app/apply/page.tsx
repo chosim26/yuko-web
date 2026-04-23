@@ -2,7 +2,7 @@
 
 import { useState, useEffect, KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
-import { track } from "@/lib/track";
+import { track, fireLead } from "@/lib/track";
 
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3aBcoWlv6iQPYSClCYbwVJFfqB3AN6eZbpLoJ0e0ejYYw1L96mDbYzy1eXbziASnJ/exec";
 
@@ -108,6 +108,10 @@ export default function ApplyPage() {
       landing_url: sessionStorage.getItem("landing_url") || "",
     };
 
+    // Fire Lead BEFORE navigation: client Pixel + server CAPI in parallel, dedup'd by eventID.
+    // keepalive on CAPI fetch survives the router.push unmount.
+    fireLead({ contactMethod, contactHandle });
+
     try {
       await fetch(APPS_SCRIPT_URL, {
         method: "POST",
@@ -115,12 +119,10 @@ export default function ApplyPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      track("Lead", { content_name: "apply_submit", value: 0, currency: "USD" });
-      router.push("/apply/thanks");
     } catch {
-      track("Lead", { content_name: "apply_submit", value: 0, currency: "USD" });
-      router.push("/apply/thanks");
+      // no-cors always catches; submission still goes through
     }
+    router.push("/apply/thanks");
   }
 
   return (
