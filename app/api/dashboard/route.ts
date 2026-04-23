@@ -39,14 +39,23 @@ async function metaGet(endpoint: string, params: Record<string, string> = {}) {
   return r.json();
 }
 
-function dateRange(days: number) {
+const START_DATE = "2026-04-19"; // 본격 집행 시작일 — 이 날짜 이전 데이터는 집계에서 제외
+
+function fixedRange() {
   const now = new Date();
-  const since = new Date(now.getTime() - days * 86400000);
-  return JSON.stringify({ since: since.toISOString().slice(0, 10), until: now.toISOString().slice(0, 10) });
+  const untilStr = now.toLocaleDateString("en-CA", { timeZone: "Asia/Seoul" });
+  return JSON.stringify({ since: START_DATE, until: untilStr });
+}
+
+function daysSince(start: string): number {
+  const now = new Date();
+  const todayStr = now.toLocaleDateString("en-CA", { timeZone: "Asia/Seoul" });
+  const ms = new Date(todayStr + "T00:00:00Z").getTime() - new Date(start + "T00:00:00Z").getTime();
+  return Math.max(1, Math.floor(ms / 86400000) + 1);
 }
 
 export async function GET() {
-  const days = 7;
+  const days = daysSince(START_DATE);
   const now = new Date();
   const nowStr = now.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
   const todayStr = now.toLocaleDateString("en-CA", { timeZone: "Asia/Seoul" }); // YYYY-MM-DD
@@ -54,10 +63,10 @@ export async function GET() {
   // Fetch all data in parallel
   const [todayMeta, adsets, adsData, dailyData, dailyAdset, sheetsSummary, sheetsLeads] = await Promise.all([
     metaGet(`${AD_ACCOUNT}/insights`, { fields: "impressions,clicks,spend,cpc,ctr,actions", date_preset: "today" }),
-    metaGet(`${AD_ACCOUNT}/insights`, { fields: "adset_name,impressions,clicks,spend,cpc,ctr,actions", level: "adset", time_range: dateRange(days) }),
-    metaGet(`${AD_ACCOUNT}/insights`, { fields: "ad_name,adset_name,impressions,clicks,spend,cpc,ctr,actions", level: "ad", time_range: dateRange(days), limit: "50" }),
-    metaGet(`${AD_ACCOUNT}/insights`, { fields: "impressions,clicks,spend,cpc,ctr,actions", time_increment: "1", time_range: dateRange(days) }),
-    metaGet(`${AD_ACCOUNT}/insights`, { fields: "adset_name,impressions,clicks,spend,cpc,ctr,actions", level: "adset", time_increment: "1", time_range: dateRange(days), limit: "200" }),
+    metaGet(`${AD_ACCOUNT}/insights`, { fields: "adset_name,impressions,clicks,spend,cpc,ctr,actions", level: "adset", time_range: fixedRange() }),
+    metaGet(`${AD_ACCOUNT}/insights`, { fields: "ad_name,adset_name,impressions,clicks,spend,cpc,ctr,actions", level: "ad", time_range: fixedRange(), limit: "50" }),
+    metaGet(`${AD_ACCOUNT}/insights`, { fields: "impressions,clicks,spend,cpc,ctr,actions", time_increment: "1", time_range: fixedRange() }),
+    metaGet(`${AD_ACCOUNT}/insights`, { fields: "adset_name,impressions,clicks,spend,cpc,ctr,actions", level: "adset", time_increment: "1", time_range: fixedRange(), limit: "200" }),
     fetch(`${SHEETS_URL}?key=${SHEETS_KEY}&action=summary`, { cache: "no-store" }).then(r => r.json()).catch(() => ({ total_leads: 0, by_date: {}, by_vibe: {}, by_contact_method: {}, by_utm_source: {}, by_utm_campaign: {} })),
     fetch(`${SHEETS_URL}?key=${SHEETS_KEY}&action=leads`, { cache: "no-store" }).then(r => r.json()).catch(() => ({ leads: [] })),
   ]);
@@ -71,14 +80,42 @@ export async function GET() {
   const tLc = xact(t.actions, "link_click");
   const tLpv = xact(t.actions, "landing_page_view");
 
-  // Sheets
-  const totalLeads = sheetsSummary.total_leads || 0;
-  const leadsByDate: Record<string, number> = sheetsSummary.by_date || {};
-  const leadsByVibe: Record<string, number> = sheetsSummary.by_vibe || {};
-  const leadsByContact: Record<string, number> = sheetsSummary.by_contact_method || {};
-  const leadsByUtmSource: Record<string, number> = sheetsSummary.by_utm_source || {};
+  // Sheets — START_DATE 이전 데이터는 모두 제외
+  const rawLeadsByDate: Record<string, number> = sheetsSummary.by_date || {};
+  const leadsByDate: Record<string, number> = Object.fromEntries(
+    Object.entries(rawLeadsByDate).filter(([k]) => k >= START_DATE)
+  );
+
+  // leadList: date 필드가 Korean locale (예: "2026. 4. 21. 오전 7:02:28"). YYYY-MM-DD로 변환 후 필터.
+  const parseLeadDate = (d: string): string => {
+    const m = d.match(/(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})/);
+    if (!m) return "";
+    return `${m[1]}-${m[2].padStart(2, "0")}-${m[3].padStart(2, "0")}`;
+  };
+  const rawLeadList = sheetsLeads.leads || [];
+  const leadList = rawLeadList.filter((l: { date: string }) => {
+    const d = parseLeadDate(l.date);
+    return d && d >= START_DATE;
+  });
+
+  // 필터된 리스트로 집계 재계산
+  const totalLeads = leadList.length;
+  const leadsByVibe: Record<string, number> = {};
+  const leadsByContact: Record<string, number> = {};
+  const leadsByUtmSource: Record<string, number> = {};
+  for (const l of leadList as Array<{ vibes?: string; contact_method?: string; utm_source?: string }>) {
+    for (const v of (l.vibes || "").split(",").map(x => x.trim()).filter(Boolean)) {
+      leadsByVibe[v] = (leadsByVibe[v] || 0) + 1;
+    }
+    const cm = (l.contact_method || "").trim();
+    if (cm) leadsByContact[cm] = (leadsByContact[cm] || 0) + 1;
+    const us = (l.utm_source || "").trim() || "직접/미확인";
+    leadsByUtmSource[us] = (leadsByUtmSource[us] || 0) + 1;
+  }
+  const sortedLeadDates = Object.keys(leadsByDate).sort();
+  const firstLead = sortedLeadDates[0] || "—";
+  const lastLead = sortedLeadDates[sortedLeadDates.length - 1] || "—";
   const todayLeads = leadsByDate[todayStr] || 0;
-  const leadList = sheetsLeads.leads || [];
 
   // AdSet rows
   const adsetRows = (adsets?.data || []).map((r: InsightRow) => ({
@@ -262,7 +299,7 @@ tr:hover{background:#1a1a1a}
 
 <div class="hdr">
     <h1>yuko. 대시보드</h1>
-    <div class="meta">${nowStr} 기준 · 최근 ${days}일 · 새로고침하면 업데이트</div>
+    <div class="meta">${nowStr} 기준 · ${START_DATE} ~ ${todayStr} (${days}일) · 새로고침하면 업데이트</div>
 </div>
 <div class="refresh-note">이 페이지를 새로고침(F5)하면 항상 최신 데이터로 업데이트됩니다</div>
 
@@ -285,15 +322,15 @@ tr:hover{background:#1a1a1a}
     <h2>실제 폼 신청자 (Google Sheets)</h2>
     <div class="today-row">
         <div class="today-kpi"><div class="v" style="color:#4ade80">${totalLeads}</div><div class="l">총 신청자 수</div></div>
-        <div class="today-kpi"><div class="v">${sheetsSummary.first_lead || "—"}</div><div class="l">첫 신청</div></div>
-        <div class="today-kpi"><div class="v">${sheetsSummary.last_lead || "—"}</div><div class="l">최근 신청</div></div>
+        <div class="today-kpi"><div class="v">${firstLead}</div><div class="l">첫 신청</div></div>
+        <div class="today-kpi"><div class="v">${lastLead}</div><div class="l">최근 신청</div></div>
         <div class="today-kpi"><div class="v">${realCac ? realCac.toLocaleString(undefined, { maximumFractionDigits: 0 }) + "원" : "∞"}</div><div class="l">실제 CAC<br><span style="font-size:9px;color:#555">총지출÷신청자수</span></div></div>
     </div>
 </div>
 
 <!-- 핵심 지표 -->
 <div class="grid g8">
-    <div class="card hi"><div class="lbl">총 지출</div><div class="val">${totalSpend.toLocaleString()}원</div><div class="desc">최근 ${days}일 광고비 합계</div></div>
+    <div class="card hi"><div class="lbl">총 지출</div><div class="val">${totalSpend.toLocaleString()}원</div><div class="desc">${START_DATE} 이후 광고비 합계 (${days}일)</div></div>
     <div class="card"><div class="lbl">노출수</div><div class="val">${totalImp.toLocaleString()}</div><div class="desc">광고가 화면에 보인 횟수</div></div>
     <div class="card"><div class="lbl">링크 클릭</div><div class="val">${totalLc.toLocaleString()}</div><div class="desc">광고 눌러서 사이트로 온 수</div></div>
     <div class="card"><div class="lbl">랜딩 도착</div><div class="val">${totalLpv.toLocaleString()}</div><div class="desc">사이트 페이지 로드 완료</div></div>
