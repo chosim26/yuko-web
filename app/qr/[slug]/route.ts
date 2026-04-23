@@ -38,22 +38,15 @@ export async function GET(
   const { slug } = await ctx.params;
   const campaign = CAMPAIGNS[slug] || "street_generic";
 
-  // Log the scan — fire-and-forget
-  const payload = {
-    key: SHEETS_KEY,
-    action: "qr_scan",
-    timestamp: new Date().toISOString(),
-    slug,
-    utm_campaign: campaign,
-    user_agent: req.headers.get("user-agent") || "",
-    referrer: req.headers.get("referer") || "",
-    country: req.headers.get("x-vercel-ip-country") || "",
-    city: req.headers.get("x-vercel-ip-city") || "",
-  };
-  void fetch(SHEETS_URL, {
-    method: "POST",
-    body: JSON.stringify(payload),
-  }).catch(() => { /* don't block redirect */ });
+  // NOTE: Sheet 로깅은 Apps Script 패치 완료 전까지 비활성화.
+  // 패치 없이 POST하면 leads 탭에 empty 행 생성됨.
+  // 스캔 카운트는 Vercel 로그(이 라우트 호출 수) / GA4(리다이렉트 후 utm_landing 이벤트)로 충분.
+  // 패치 완료 시 아래 블록 주석 해제:
+  //
+  // const payload = { key: SHEETS_KEY, action: "qr_scan", timestamp: ..., slug, ... };
+  // void fetch(SHEETS_URL, { method: "POST", body: JSON.stringify(payload) }).catch(() => {});
+  void req; // suppress unused warning
+  void SHEETS_URL; void SHEETS_KEY;
 
   // Redirect to / with UTM appended — so downstream tracking (Meta Pixel, GA4, form submit) picks it up
   const destUrl = new URL("/", req.nextUrl);

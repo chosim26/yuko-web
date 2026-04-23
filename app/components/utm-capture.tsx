@@ -36,20 +36,12 @@ export default function UtmCapture() {
         });
       } catch { /* ignore */ }
 
-      // Google Sheet via /api/track-visit (fire-and-forget, no await)
-      try {
-        fetch("/api/track-visit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...utm,
-            referrer: document.referrer,
-            user_agent: navigator.userAgent,
-            landing_url: window.location.href,
-          }),
-          keepalive: true,
-        }).catch(() => { /* ignore */ });
-      } catch { /* ignore */ }
+      // NOTE: Sheet 방문 로깅은 Apps Script 패치 완료 후에만 활성화.
+      // 지금 POST하면 leads 탭에 empty 행 생성됨 (Apps Script가 action=log_visit 미지원).
+      // 패치 완료 시: marketing/전단지 시안/apps-script-patch.md 따라 업데이트 후
+      // 아래 블록 주석 해제.
+      //
+      // fetch("/api/track-visit", { ... });
     }
   }, []);
 
