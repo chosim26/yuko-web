@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, KeyboardEvent } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { track, fireLead } from "@/lib/track";
 
@@ -10,46 +10,42 @@ type Locale = "en" | "ja" | "zh";
 
 const t = {
   en: {
-    step1: "What's your name?",
-    step1ph: "First name",
-    step2: "What's your vibe?",
-    step2sub: "Tap all that excite you",
-    step3: "How do we reach you?",
-    step3ph: "Your @handle, email, or number",
+    // Step 1: name + vibes
+    step1_title: "Name & vibe",
+    step1_namePh: "Your first name",
+    step1_vibeSub: "Tap all that excite you",
+    // Step 2: contact
+    step2_title: "How do we reach you?",
+    step2_contactPh: "Your @handle, email, or number",
     next: "Next →",
     submit: "Meet your YUKO →",
     sending: "Matching...",
     vibes: ["Chill cafes", "Bar hopping", "K-drama spots", "Street food", "K-beauty", "Hidden spots"],
     contacts: ["Email", "Instagram", "WhatsApp", "KakaoTalk", "Line"],
-    press: "press Enter ↵",
   },
   ja: {
-    step1: "お名前は？",
-    step1ph: "名前",
-    step2: "どんな旅がしたい？",
-    step2sub: "気になるもの全部タップ",
-    step3: "連絡方法を教えて",
-    step3ph: "@ハンドル、メール、電話番号",
+    step1_title: "お名前とムード",
+    step1_namePh: "あなたの名前",
+    step1_vibeSub: "気になるもの全部タップ",
+    step2_title: "連絡方法を教えて",
+    step2_contactPh: "@ハンドル、メール、電話番号",
     next: "次へ →",
     submit: "YUKOに会う →",
     sending: "マッチング中...",
     vibes: ["カフェ巡り", "バーホッピング", "Kドラマ", "ストリートフード", "Kビューティー", "隠れスポット"],
     contacts: ["メール", "Instagram", "WhatsApp", "KakaoTalk", "Line"],
-    press: "Enter ↵",
   },
   zh: {
-    step1: "你叫什么名字？",
-    step1ph: "名字",
-    step2: "你想怎么玩？",
-    step2sub: "选所有感兴趣的",
-    step3: "我们怎么联系你？",
-    step3ph: "@账号、邮箱或手机号",
+    step1_title: "名字与喜好",
+    step1_namePh: "你的名字",
+    step1_vibeSub: "选所有感兴趣的",
+    step2_title: "我们怎么联系你？",
+    step2_contactPh: "@账号、邮箱或手机号",
     next: "下一步 →",
     submit: "认识你的YUKO →",
     sending: "匹配中...",
     vibes: ["悠闲咖啡", "酒吧夜生活", "韩剧打卡", "街头美食", "K-Beauty", "隐藏景点"],
     contacts: ["邮箱", "Instagram", "WhatsApp", "KakaoTalk", "Line"],
-    press: "Enter ↵",
   },
 };
 
@@ -58,7 +54,7 @@ const contactValues = ["email", "instagram", "whatsapp", "kakaotalk", "line"];
 
 export default function ApplyPage() {
   const router = useRouter();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(0); // 0 = name+vibes, 1 = contact
   const [name, setName] = useState("");
   const [vibes, setVibes] = useState<string[]>([]);
   const [contactMethod, setContactMethod] = useState("");
@@ -76,20 +72,15 @@ export default function ApplyPage() {
   }, []);
 
   const l = t[locale];
+  const step1Valid = name.trim().length > 0 && vibes.length > 0;
+  const step2Valid = !!contactMethod && contactHandle.trim().length > 0;
 
   function toggleVibe(v: string) {
     setVibes((prev) => (prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v]));
   }
 
-  function handleKeyDown(e: KeyboardEvent) {
-    if (e.key === "Enter" && step === 0 && name.trim()) {
-      e.preventDefault();
-      setStep(1);
-    }
-  }
-
   async function handleSubmit() {
-    if (!contactMethod || !contactHandle.trim()) return;
+    if (!step2Valid) return;
     setSubmitting(true);
 
     const payload = {
@@ -137,13 +128,13 @@ export default function ApplyPage() {
         </div>
       </div>
 
-      {/* Progress dots */}
+      {/* Progress dots (2 steps) */}
       <div className="flex items-center justify-center gap-2 pt-8">
-        {[0, 1, 2].map((i) => (
+        {[0, 1].map((i) => (
           <div
             key={i}
             className={`h-1.5 rounded-full transition-all duration-500 ${
-              i === step ? "w-8 bg-neon" : i < step ? "w-4 bg-neon/60" : "w-4 bg-white/20"
+              i === step ? "w-10 bg-neon" : i < step ? "w-5 bg-neon/60" : "w-5 bg-white/20"
             }`}
           />
         ))}
@@ -153,68 +144,58 @@ export default function ApplyPage() {
       <div className="flex-1 flex items-center justify-center px-6 py-10">
         <div className="w-full max-w-lg">
 
-          {/* STEP 1: Name */}
+          {/* STEP 1: Name + Vibes (2 fields on one page) */}
           {step === 0 && (
-            <div className="animate-fadeIn text-center space-y-8">
-              <h1 className="font-caveat text-5xl md:text-7xl text-neon">{l.step1}</h1>
-              <input
-                type="text"
-                autoFocus
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder={l.step1ph}
-                className="w-full text-center text-3xl md:text-4xl bg-transparent border-b-2 border-white/20 focus:border-neon py-4 text-off-white placeholder:text-white/30 focus:outline-none transition-colors"
-              />
-              <div className="space-y-3">
+            <div className="animate-fadeIn space-y-10">
+              {/* Name field */}
+              <div className="text-center space-y-3">
+                <h2 className="font-caveat text-4xl md:text-5xl text-neon">{l.step1_title}</h2>
+                <input
+                  type="text"
+                  autoFocus
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={l.step1_namePh}
+                  className="w-full text-center text-2xl md:text-3xl bg-transparent border-b-2 border-white/20 focus:border-neon py-3 text-off-white placeholder:text-white/30 focus:outline-none transition-colors"
+                />
+              </div>
+
+              {/* Vibes field */}
+              <div className="space-y-4">
+                <p className="text-center text-white/60 text-sm">{l.step1_vibeSub}</p>
+                <div className="flex flex-wrap justify-center gap-2.5">
+                  {vibeValues.map((v, i) => (
+                    <button
+                      key={v}
+                      onClick={() => toggleVibe(v)}
+                      className={`px-5 py-2.5 rounded-full text-sm font-medium border-2 transition-all ${
+                        vibes.includes(v)
+                          ? "bg-neon text-obsidian border-neon font-bold"
+                          : "bg-white/5 text-white/80 border-white/15 hover:border-white/30"
+                      }`}
+                    >
+                      {l.vibes[i]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="text-center">
                 <button
-                  onClick={() => name.trim() && setStep(1)}
-                  disabled={!name.trim()}
+                  onClick={() => step1Valid && setStep(1)}
+                  disabled={!step1Valid}
                   className="bg-neon text-obsidian px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform disabled:opacity-30 disabled:hover:scale-100"
                 >
                   {l.next}
                 </button>
-                <div className="text-xs text-white/40">{l.press}</div>
               </div>
             </div>
           )}
 
-          {/* STEP 2: Vibes */}
+          {/* STEP 2: Contact method + handle */}
           {step === 1 && (
             <div className="animate-fadeIn text-center space-y-8">
-              <div>
-                <h1 className="font-caveat text-5xl md:text-7xl text-neon">{l.step2}</h1>
-                <p className="text-white/60 mt-2">{l.step2sub}</p>
-              </div>
-              <div className="flex flex-wrap justify-center gap-3">
-                {vibeValues.map((v, i) => (
-                  <button
-                    key={v}
-                    onClick={() => toggleVibe(v)}
-                    className={`px-6 py-3 rounded-full text-base font-medium border-2 transition-all hover:scale-105 ${
-                      vibes.includes(v)
-                        ? "bg-neon text-obsidian border-neon font-bold scale-105"
-                        : "bg-white/5 text-white/80 border-white/15 hover:border-white/30"
-                    }`}
-                  >
-                    {l.vibes[i]}
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => setStep(2)}
-                disabled={vibes.length === 0}
-                className="bg-neon text-obsidian px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform disabled:opacity-30 disabled:hover:scale-100"
-              >
-                {l.next}
-              </button>
-            </div>
-          )}
-
-          {/* STEP 3: Contact → Submit */}
-          {step === 2 && (
-            <div className="animate-fadeIn text-center space-y-8">
-              <h1 className="font-caveat text-5xl md:text-7xl text-neon">{l.step3}</h1>
+              <h1 className="font-caveat text-4xl md:text-5xl text-neon">{l.step2_title}</h1>
               <div className="flex flex-wrap justify-center gap-2">
                 {contactValues.map((c, i) => (
                   <button
@@ -235,12 +216,12 @@ export default function ApplyPage() {
                 autoFocus
                 value={contactHandle}
                 onChange={(e) => setContactHandle(e.target.value)}
-                placeholder={l.step3ph}
+                placeholder={l.step2_contactPh}
                 className="w-full text-center text-xl md:text-2xl bg-transparent border-b-2 border-white/20 focus:border-neon py-4 text-off-white placeholder:text-white/30 focus:outline-none transition-colors"
               />
               <button
                 onClick={handleSubmit}
-                disabled={!contactMethod || !contactHandle.trim() || submitting}
+                disabled={!step2Valid || submitting}
                 className="bg-neon text-obsidian px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform disabled:opacity-30 disabled:hover:scale-100 shadow-[0_8px_32px_rgba(243,243,26,0.3)]"
               >
                 {submitting ? l.sending : l.submit}
