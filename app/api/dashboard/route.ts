@@ -61,7 +61,7 @@ export async function GET() {
   const todayStr = now.toLocaleDateString("en-CA", { timeZone: "Asia/Seoul" }); // YYYY-MM-DD
 
   // Fetch all data in parallel
-  const [todayMeta, adsets, adsData, dailyData, dailyAdset, sheetsSummary, sheetsLeads] = await Promise.all([
+  const [todayMeta, adsets, adsData, dailyData, dailyAdset, sheetsSummary, sheetsLeads, sheetsVisits, sheetsQrScans] = await Promise.all([
     metaGet(`${AD_ACCOUNT}/insights`, { fields: "impressions,clicks,spend,cpc,ctr,actions", date_preset: "today" }),
     metaGet(`${AD_ACCOUNT}/insights`, { fields: "adset_name,impressions,clicks,spend,cpc,ctr,actions", level: "adset", time_range: fixedRange() }),
     metaGet(`${AD_ACCOUNT}/insights`, { fields: "ad_name,adset_name,impressions,clicks,spend,cpc,ctr,actions", level: "ad", time_range: fixedRange(), limit: "50" }),
@@ -69,7 +69,13 @@ export async function GET() {
     metaGet(`${AD_ACCOUNT}/insights`, { fields: "adset_name,impressions,clicks,spend,cpc,ctr,actions", level: "adset", time_increment: "1", time_range: fixedRange(), limit: "200" }),
     fetch(`${SHEETS_URL}?key=${SHEETS_KEY}&action=summary`, { cache: "no-store" }).then(r => r.json()).catch(() => ({ total_leads: 0, by_date: {}, by_vibe: {}, by_contact_method: {}, by_utm_source: {}, by_utm_campaign: {} })),
     fetch(`${SHEETS_URL}?key=${SHEETS_KEY}&action=leads`, { cache: "no-store" }).then(r => r.json()).catch(() => ({ leads: [] })),
+    // Optional — requires Apps Script patch (see /marketing/전단지 시안/apps-script-patch.md).
+    // Falls back to empty when Apps Script hasn't been upgraded yet.
+    fetch(`${SHEETS_URL}?key=${SHEETS_KEY}&action=visits`, { cache: "no-store" }).then(r => r.json()).catch(() => ({ visits: [], total: 0 })),
+    fetch(`${SHEETS_URL}?key=${SHEETS_KEY}&action=qr_scans`, { cache: "no-store" }).then(r => r.json()).catch(() => ({ scans: [], total: 0, by_slug: {} })),
   ]);
+
+  // (flyer/QR 집계는 leadList 계산 이후 별도 블록에서 처리)
 
   // Today
   const t: InsightRow = todayMeta?.data?.[0] || {};
@@ -112,6 +118,26 @@ export async function GET() {
     const us = (l.utm_source || "").trim() || "직접/미확인";
     leadsByUtmSource[us] = (leadsByUtmSource[us] || 0) + 1;
   }
+  // ───────── 전단지/QR 트래픽 집계 (Apps Script 미업데이트 시 전부 0 fallback) ─────────
+  const visitList = (sheetsVisits?.visits || []) as Array<{ utm_source?: string; utm_campaign?: string; timestamp?: string }>;
+  const qrScans = (sheetsQrScans?.scans || []) as Array<{ slug?: string; utm_campaign?: string; timestamp?: string }>;
+  const qrBySlug: Record<string, number> = sheetsQrScans?.by_slug || {};
+  const totalVisits = (sheetsVisits?.total as number) || visitList.length || 0;
+  const totalQrScans = (sheetsQrScans?.total as number) || qrScans.length || 0;
+
+  const visitsByUtmSource: Record<string, number> = {};
+  for (const v of visitList) {
+    const k = (v.utm_source || "").trim() || "직접";
+    visitsByUtmSource[k] = (visitsByUtmSource[k] || 0) + 1;
+  }
+  const flyerVisits = visitsByUtmSource["flyer"] || 0;
+  const flyerLeads = (leadList as Array<{ utm_source?: string }>).filter(l => (l.utm_source || "") === "flyer").length;
+
+  // Scan → Visit → Lead 3단 퍼널 (전단지 전용)
+  const scanToVisitRate = totalQrScans ? (flyerVisits / totalQrScans * 100) : 0;
+  const visitToLeadRate = flyerVisits ? (flyerLeads / flyerVisits * 100) : 0;
+  const flyerSectionActive = (totalQrScans + totalVisits + flyerVisits + flyerLeads) > 0;
+
   const sortedLeadDates = Object.keys(leadsByDate).sort();
   const firstLead = sortedLeadDates[0] || "—";
   const lastLead = sortedLeadDates[sortedLeadDates.length - 1] || "—";
@@ -327,6 +353,25 @@ tr:hover{background:#1a1a1a}
         <div class="today-kpi"><div class="v">${realCac ? realCac.toLocaleString(undefined, { maximumFractionDigits: 0 }) + "원" : "∞"}</div><div class="l">실제 CAC<br><span style="font-size:9px;color:#555">총지출÷신청자수</span></div></div>
     </div>
 </div>
+
+${flyerSectionActive ? `
+<!-- 전단지 / QR 트래픽 -->
+<div class="lead-strip" style="background:linear-gradient(135deg,#1a0a1a,#0a0a0a);border-color:#FF8A7A33">
+    <h2 style="color:#FF8A7A">전단지 · QR 트래픽</h2>
+    <p style="color:#666;font-size:12px;margin-bottom:12px">오프라인 전단지 QR 스캔부터 리드 전환까지 — Apps Script 업데이트 완료 시 자동 집계</p>
+    <div class="today-row">
+        <div class="today-kpi"><div class="v" style="color:#FF8A7A">${totalQrScans}</div><div class="l">QR 스캔 수<br><span style="font-size:9px;color:#555">/qr/* 리다이렉트 방문</span></div></div>
+        <div class="today-kpi"><div class="v">${totalVisits}</div><div class="l">UTM 방문 총계<br><span style="font-size:9px;color:#555">utm 있는 진입 전부</span></div></div>
+        <div class="today-kpi"><div class="v" style="color:#F3F31A">${flyerVisits}</div><div class="l">전단지 방문<br><span style="font-size:9px;color:#555">utm_source=flyer</span></div></div>
+        <div class="today-kpi"><div class="v" style="color:#4ade80">${flyerLeads}</div><div class="l">전단지 리드<br><span style="font-size:9px;color:#555">폼 제출 완료</span></div></div>
+        <div class="today-kpi"><div class="v">${scanToVisitRate.toFixed(0)}%</div><div class="l">스캔→방문<br><span style="font-size:9px;color:#555">리다이렉트 성공률</span></div></div>
+        <div class="today-kpi"><div class="v">${visitToLeadRate.toFixed(1)}%</div><div class="l">방문→리드<br><span style="font-size:9px;color:#555">전단지 유입 전환율</span></div></div>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:16px;flex-wrap:wrap">
+        ${Object.entries(qrBySlug).map(([slug, count]) => `<div style="padding:8px 14px;background:#161616;border:1px solid #2a2a2a;border-radius:6px;font-family:monospace;font-size:12px;color:#aaa">/qr/<strong style="color:#FF8A7A">${slug}</strong> · <span style="color:#fff">${count}</span> scans</div>`).join('')}
+    </div>
+</div>
+` : ''}
 
 <!-- 핵심 지표 -->
 <div class="grid g8">
