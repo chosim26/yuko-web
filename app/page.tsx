@@ -391,10 +391,10 @@ export default function Home() {
           </ScrollReveal>
           <div className="grid md:grid-cols-5 gap-5">
             {[
-              { n: "1", t: "Apply", d: "Fill a 3-minute form with your travel vibe." },
-              { n: "2", t: "Matched", d: "Your peer Korean mate within 24h." },
-              { n: "3", t: "Chat", d: "Plan your custom day — 2 days before you land." },
-              { n: "4", t: "Hang out", d: "Full day together, made for you." },
+              { n: "1", t: "Apply", d: "Quick 3-step form. Tell us when, who, your vibe." },
+              { n: "2", t: "Matched", d: "Hand-picked peer Korean mate within 24h." },
+              { n: "3", t: "Chat", d: "Your mate spends 2–3h planning your day, just for you." },
+              { n: "4", t: "Hang out", d: "Full day together — designed around your vibe." },
               { n: "5", t: "Remember", d: "Photo pack + Korean phrase card after." },
             ].map((s, i) => (
               <ScrollReveal key={i} direction="up" delay={i * 150}>
@@ -715,11 +715,19 @@ export default function Home() {
               },
               {
                 q: "How much does it cost?",
-                a: "Half-day (6h min): $129 (was $222) · Full-day (10h): $219 (was $370) · 2 days: $349 (was $630). Up to 40% launch special. The 6h is a guaranteed minimum — not a hard stop, so your day naturally runs longer if the vibe's right. Price is for 2 people — additional guests or custom requests are discussed in chat. No upfront payment. You only pay after your mate is confirmed.",
+                a: "Half-day (6h min): $129 (~₩190,000) · Full-day (10h): $219 (~₩320,000) · 2-day: $349 (~₩510,000). Early launch pricing — up to 40% off. Price is for up to 2 people. The 6h is a guaranteed minimum — not a hard stop. No upfront payment — you only pay after your mate is confirmed.",
+              },
+              {
+                q: "What's NOT included?",
+                a: "Your own meals, tickets, shopping, and transport are paid by you (Pure Dutch — like hanging out with a normal friend). Your buddy covers their own. The booking fee covers their time, planning, and local expertise. For bigger items (restaurants, activities with entry fees), we plan and confirm prices together in advance.",
+              },
+              {
+                q: "Why not cheaper? (vs group tour)",
+                a: "A group tour ($60) gives you 30 strangers and a fixed route. YUKO ($129) gives you one Korean friend, 2–3h of pre-planning before you land, and a day designed around YOU. Plus access to spots Google won't show.",
               },
               {
                 q: "When can I book?",
-                a: "Apply now — it takes 30 seconds. We'll match you within 24 hours.",
+                a: "Apply now — it takes 60 seconds. We'll match you within 24 hours.",
               },
             ].map((item, i) => (
               <ScrollReveal key={i} direction="up" delay={i * 100}>
