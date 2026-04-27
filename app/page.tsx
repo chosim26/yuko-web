@@ -719,11 +719,11 @@ export default function Home() {
               },
               {
                 q: "What's NOT included?",
-                a: "Your own meals, tickets, shopping, and transport are paid by you (Pure Dutch — like hanging out with a normal friend). Your buddy covers their own. The booking fee covers their time, planning, and local expertise. For bigger items (restaurants, activities with entry fees), we plan and confirm prices together in advance.",
+                a: "Your own meals, tickets, shopping, and transport are paid by you (Pure Dutch — like hanging out with a normal friend). Your buddy covers their own. The booking fee covers their time, planning, and local expertise. For bigger items (restaurants, activities with entry fees), we plan and confirm prices together in advance.\n\nYour buddy will help you set up the basics — T-money transit card, temporary SIM, and ride/route guidance — so logistics don't eat into your day. Hotel pickup is available on request (please ask in advance).",
               },
               {
-                q: "Why not cheaper? (vs group tour)",
-                a: "A group tour ($60) gives you 30 strangers and a fixed route. YUKO ($129) gives you one Korean friend, 2–3h of pre-planning before you land, and a day designed around YOU. Plus access to spots Google won't show.",
+                q: "Why not cheaper? (vs other Seoul services)",
+                a: "Group tour ($60) = 30 strangers, fixed route. Established 1-on-1 personal concierge in Seoul = $500 for 3 people, and you only meet them on arrival. YUKO ($129+) = one peer Korean friend (20–35), pre-trip chat starting 2 days before you land, and a day designed around YOU — in your language (EN/JA/CN). Same friend-style hospitality, better matching, lower price.",
               },
               {
                 q: "When can I book?",
@@ -816,7 +816,11 @@ export default function Home() {
               <span className="hidden md:inline text-xs">Email</span>
             </a>
           </div>
-          <div className="text-xs">© 2026 YUKO · Your friend is here.</div>
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <a href="/guide" className="text-white/60 hover:text-neon transition-colors underline-offset-2 hover:underline">For partners</a>
+            <span className="text-white/30">·</span>
+            <span>© 2026 YUKO · Your friend is here.</span>
+          </div>
         </div>
       </footer>
     </main>

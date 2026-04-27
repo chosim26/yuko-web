@@ -717,11 +717,11 @@ export default function Home() {
               },
               {
                 q: "不包含哪些？",
-                a: "你自己的餐饮、门票、购物和交通费用各付各的（AA制 — 像和普通朋友一起出去玩的感觉）。Mate负担自己的部分。费用涵盖Mate的时间、规划、本地知识。餐厅或需要门票的活动，我们会提前一起商量预算和方案。",
+                a: "你自己的餐饮、门票、购物和交通费用各付各的（AA制 — 像和普通朋友一起出去玩的感觉）。Mate负担自己的部分。费用涵盖Mate的时间、规划、本地知识。餐厅或需要门票的活动，我们会提前一起商量预算和方案。\n\nMate会全力帮你搞定T-money交通卡、临时SIM卡、路线指引等基础设置，节省你的时间。酒店接送服务可提前咨询安排。",
               },
               {
-                q: "为什么比团体游贵？",
-                a: "团体游（$60）是和30个陌生人走固定路线。YUKO（$129）是1个韩国朋友，到达前2-3小时为你定制规划，专为你设计的一天。还有Google搜不到的本地点。",
+                q: "为什么比团体游或其他服务贵？",
+                a: "团体游（$60）= 30个陌生人 + 固定路线。1对1个人礼宾服务 = $500（3人，到达后才见面）。YUKO = $129起，1位同龄（20-35岁）韩国朋友，到达前2天就开始聊天，为你定制专属一天，支持EN/JA/CN多语言。同样的朋友式款待，更好的匹配，更低的价格。",
               },
               {
                 q: "什么时候可以预约？",
@@ -814,7 +814,11 @@ export default function Home() {
               <span className="hidden md:inline text-xs">Email</span>
             </a>
           </div>
-          <div className="text-xs">© 2026 YUKO · 你的朋友在这里。</div>
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <a href="/guide" className="text-white/60 hover:text-neon transition-colors underline-offset-2 hover:underline">合作伙伴</a>
+            <span className="text-white/30">·</span>
+            <span>© 2026 YUKO · 你的朋友在这里。</span>
+          </div>
         </div>
       </footer>
     </main>
