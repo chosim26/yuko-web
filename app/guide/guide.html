@@ -88,6 +88,26 @@ nav .container { display: flex; justify-content: space-between; align-items: cen
   line-height: 1;
 }
 .logo .u { color: var(--neon); }
+.logo-link { text-decoration: none; display: inline-block; }
+.logo-link:hover .logo { opacity: 0.85; transition: opacity 0.2s; }
+.nav-right { display: flex; align-items: center; gap: 14px; }
+.back-home {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.back-home:hover { color: var(--neon); border-color: var(--neon); }
+@media (max-width: 640px) {
+  .back-home { font-size: 10px; padding: 5px 8px; }
+  .nav-right { gap: 8px; }
+}
 .lang-switch { display: flex; gap: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1px; }
 .lang-switch button {
   background: transparent;
@@ -332,12 +352,17 @@ footer { padding: 32px 0; border-top: 1px solid var(--border); font-family: 'IBM
 
 <nav>
   <div class="container">
-    <span class="logo">y<span class="u">u</span>ko.</span>
-    <div class="lang-switch">
-      <button data-lang="ko">KO</button>
-      <button data-lang="en">EN</button>
-      <button data-lang="ja">JA</button>
-      <button data-lang="zh">ZH</button>
+    <a href="/" class="logo-link" aria-label="Back to YUKO home">
+      <span class="logo">y<span class="u">u</span>ko.</span>
+    </a>
+    <div class="nav-right">
+      <a href="/" class="back-home" data-i18n="back_to_home">← Home</a>
+      <div class="lang-switch">
+        <button data-lang="ko">KO</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="ja">JA</button>
+        <button data-lang="zh">ZH</button>
+      </div>
     </div>
   </div>
 </nav>
@@ -614,6 +639,7 @@ footer { padding: 32px 0; border-top: 1px solid var(--border); font-family: 'IBM
 <script>
 const I18N = {
   ko: {
+    back_to_home: "← 메인으로",
     hero_kicker: "Cultural Experience Coordination",
     hero_headline: `당신의 서울은,<br>도착 <span class="hl">2일 전</span>부터 시작됩니다.`,
     hero_desc: "또래 한국인 친구 한 명이, 당신만을 위해 하루를 설계해요. 도착하기 전부터 대화가 시작되고, 도착한 날엔 이미 아는 사이예요.",
@@ -705,6 +731,7 @@ const I18N = {
     cta_sub: "시작은 링크 하나 넘기는 것부터.",
   },
   en: {
+    back_to_home: "← Home",
     hero_kicker: "Cultural Experience Coordination",
     hero_headline: `Your Seoul starts<br><span class="hl">2 days</span> before you arrive.`,
     hero_desc: "A Korean friend your age designs your day, just for you. The conversation starts before you arrive — on day one, you already know each other.",
@@ -796,6 +823,7 @@ const I18N = {
     cta_sub: "It starts with one link passed along.",
   },
   ja: {
+    back_to_home: "← ホーム",
     hero_kicker: "Cultural Experience Coordination",
     hero_headline: `あなたのソウルは、<br>到着<span class="hl">2日前</span>から始まります。`,
     hero_desc: "同世代の韓国人の友達が、あなただけのために1日をデザインします。到着前から会話が始まり、着いた日にはもう知り合いです。",
@@ -887,6 +915,7 @@ const I18N = {
     cta_sub: "始まりはリンク1つから。",
   },
   zh: {
+    back_to_home: "← 主页",
     hero_kicker: "Cultural Experience Coordination",
     hero_headline: `你的首尔，<br>从抵达<span class="hl">2 天前</span>就开始了。`,
     hero_desc: "一位同龄的韩国朋友，为你量身设计一整天。抵达前对话就已开始，到达那天你们已是熟人。",
