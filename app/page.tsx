@@ -30,14 +30,14 @@ export default function Home() {
     <main className="min-h-screen bg-obsidian text-off-white pb-20 md:pb-0">
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-obsidian/70 border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#top" className="font-caveat text-3xl tracking-tight" style={{ filter: "drop-shadow(0 0 8px rgba(243,243,26,0.3))" }}>
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 h-20 sm:h-24 flex items-center justify-between">
+          <a href="#top" className="font-caveat text-4xl sm:text-5xl md:text-6xl tracking-tight leading-none" style={{ filter: "drop-shadow(0 0 10px rgba(243,243,26,0.35))" }}>
             y<span className="text-neon">u</span>ko<span className="text-neon logo-dot">.</span>
           </a>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <a
               href="/guide?lang=en"
-              className="text-xs sm:text-sm text-white/80 hover:text-neon transition-colors px-2 sm:px-3 py-1.5 font-medium whitespace-nowrap"
+              className="text-xs sm:text-sm text-white/90 hover:text-neon transition-all px-3 sm:px-4 py-1.5 sm:py-2 font-semibold whitespace-nowrap rounded-full border border-white/20 hover:border-neon/60 hover:bg-white/5"
             >
               Why YUKO
             </a>
