@@ -34,13 +34,21 @@ export default function Home() {
           <a href="#top" className="font-caveat text-3xl tracking-tight" style={{ filter: "drop-shadow(0 0 8px rgba(243,243,26,0.3))" }}>
             y<span className="text-neon">u</span>ko<span className="text-neon logo-dot">.</span>
           </a>
-          <a
-            href="#apply"
-            className="bg-neon text-obsidian px-5 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform"
-          >
-            YUKOに会う
-          </a>
-          <LanguageSwitcher current="ja" />
+          <div className="flex items-center gap-3">
+            <a
+              href="/guide?lang=ja"
+              className="hidden sm:inline-block text-sm text-white/80 hover:text-neon transition-colors px-3 py-1.5 font-medium"
+            >
+              なぜYUKO？
+            </a>
+            <LanguageSwitcher current="ja" />
+            <a
+              href="#apply"
+              className="bg-neon text-obsidian px-5 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform"
+            >
+              YUKOに会う
+            </a>
+          </div>
         </div>
       </nav>
 
