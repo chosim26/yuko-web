@@ -35,6 +35,12 @@ export default function Home() {
             y<span className="text-neon">u</span>ko<span className="text-neon logo-dot">.</span>
           </a>
           <div className="flex items-center gap-3">
+            <a
+              href="/guide?lang=en"
+              className="hidden sm:inline-block text-sm text-white/80 hover:text-neon transition-colors px-3 py-1.5 font-medium"
+            >
+              Why YUKO
+            </a>
             <LanguageSwitcher current="en" />
             <a
               href="#apply"
