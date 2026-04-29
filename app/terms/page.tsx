@@ -189,8 +189,8 @@ export default function TermsOfService() {
             <h2 className="text-xl font-semibold mb-3">13. Contact</h2>
             <p>
               Questions:{" "}
-              <a href="mailto:hello@yukoseoul.com" className="underline">
-                hello@yukoseoul.com
+              <a href="mailto:youxo@chosim.me" className="underline">
+                youxo@chosim.me
               </a>
               .
             </p>

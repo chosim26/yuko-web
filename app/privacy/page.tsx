@@ -144,8 +144,8 @@ export default function PrivacyPolicy() {
             <ul className="list-disc pl-5 space-y-2">
               <li>
                 <strong>Access, correct, or delete:</strong> email{" "}
-                <a href="mailto:hello@yukoseoul.com" className="underline">
-                  hello@yukoseoul.com
+                <a href="mailto:youxo@chosim.me" className="underline">
+                  youxo@chosim.me
                 </a>{" "}
                 with your request.
               </li>
@@ -203,8 +203,8 @@ export default function PrivacyPolicy() {
             <h2 className="text-xl font-semibold mb-3">11. Contact</h2>
             <p>
               Questions or requests:{" "}
-              <a href="mailto:hello@yukoseoul.com" className="underline">
-                hello@yukoseoul.com
+              <a href="mailto:youxo@chosim.me" className="underline">
+                youxo@chosim.me
               </a>
               .
             </p>
